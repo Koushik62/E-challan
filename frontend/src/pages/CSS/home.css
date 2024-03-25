@@ -1,0 +1,130 @@
+.photo{
+    display: flex;
+    background: url('C:\Users\Gurram koushik reddy\OneDrive - Indian Institute of Technology Bombay\Desktop\E-challan\frontend\src\Components\Assets\photo.png');
+    background-size: cover;
+    height: 492px;
+    padding:40px;
+    margin: 30px;
+
+   
+}
+
+.photo-left{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    color: white;
+    font-size: 26px;
+    margin: 20px;
+}
+
+.photo-right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    margin: 120px;
+    margin-left: 150px;
+    margin-right: 50px;
+    margin-bottom: 180px;
+    gap: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.photo-right p{
+    color: black;
+    font-weight: 600;
+    font-size: 25px;
+    margin: 10px;
+    
+   
+}
+
+.photo-right input{
+    display: flex;
+    flex: 1;
+    width: 300px;
+    height: 28px;
+    border-radius: 20px;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    cursor: pointer;
+}
+
+.photo-right button{
+    width: 309px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: rgb(11, 11, 227);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+
+.process{
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    
+}
+.heading{
+    display: flex;
+    justify-content: center;
+}
+
+.photos {
+    display: flex;
+    gap: 30px;
+  }
+  
+  .photos img {
+    width: 100%; /* Make images fill their parent containers */
+
+  }
+  .photos second{
+    width: 90%;
+    height: 80%;
+  }
+  
+  .photos p {
+    margin-top: 10px; /* Adjust spacing between image and text */
+  }
+  
+  .photos p span {
+    font-weight: bold;
+  }
+  
+
+  .one{
+    width: 600px;
+    height: 100px;
+  }
+  .second{
+    width: 40%;
+    height: 20%;
+    
+  }
+
+  .echallan {
+    padding: 2rem;
+    border-radius: 30px;
+    border-radius: 4px;
+    margin: 0 5%;
+    display: flex;
+    background-color: aliceblue;
+    margin-top: 20px;
+    padding: 20px;
+    
+  }
+
+  
+ .echallan img{
+  margin-top: 0;
+  padding-right: 10px;
+ }
