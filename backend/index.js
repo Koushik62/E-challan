@@ -18,6 +18,8 @@ app.use(express.json());
 // using this our react will connect to the backend
 app.use(cors());
 
+const request = require('request');
+
 // Function to make GET request to fetch task details
 const getTaskDetails = (requestId) => {
     const apiKey = '7df1cd02-8bb5-4913-b85a-8034b42b7292';
@@ -47,8 +49,8 @@ const getTaskDetails = (requestId) => {
       const taskDetails = JSON.parse(body);
       if (taskDetails.status === "completed") {
         // Task completed, send response
-        //res.send(body);
-      } else if (taskDetails.status === "in_progress") {
+        
+      } else if (taskDetails.status === "failed") {
         // Task still in progress, wait for some time and check again
         setTimeout(() => {
           getTaskDetails(requestId); // Recursive call
@@ -93,14 +95,16 @@ const getTaskDetails = (requestId) => {
       const responsebody = JSON.parse(body);
       const requestId = responsebody.request_id;
       
-      console.log(requestId);
+     
       setTimeout(() => {
         getTaskDetails(requestId); // Recursive call
       }, 5000);
-      
+  
   
     });
   });
+  
+
   
   
   

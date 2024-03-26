@@ -1,11 +1,27 @@
-import React from "react";
+import React,{useState} from "react";
 import './CSS/home.css'
 import one from '../Components/Assets/carphoto.png'
 import second from '../Components/Assets/2nd.png'
 import third from '../Components/Assets/3rd.png'
 import whatisechallan from '../Components/Assets/whatisechallan.png'
 
+import axios from 'axios';
+
 const Home=()=>{
+
+    const [vehicleNumber, setVehicleNumber] = useState('');
+
+  const handleViewChallan = () => {
+    axios.post('http://localhost:4000/challans', { vehicleNumber })
+      .then(response => {
+        console.log(response.data);
+        // Handle response from backend if needed
+      })
+      .catch(error => {
+        console.error('Error fetching vehicle details:', error);
+        // Handle error if needed
+      });
+  };
     return ( 
         <div className="Home">
             <div className="photo">
@@ -20,19 +36,23 @@ const Home=()=>{
                     </ul>
                 </div>
                 <div className="photo-right">
-                    <div>
-                        <p>Enter Vehicle number</p>
-                    </div>
-                   
-                    <div>
-                        <input placeholder = 'Enter Vehicle number' type = 'String'/>  
-                    </div>
-                    
-                    <div>
-                        <button>View Challan</button>
-                    </div>
-                        
-                </div>
+      <div>
+        <p>Enter Vehicle number</p>
+      </div>
+
+      <div>
+        <input
+          placeholder='Enter Vehicle number'
+          type='text'
+          value={vehicleNumber}
+          onChange={e => setVehicleNumber(e.target.value)}
+        />
+      </div>
+
+      <div>
+        <button onClick={handleViewChallan}>View Challan</button>
+      </div>
+    </div>
                 
             </div>
             <div className="process"> 
