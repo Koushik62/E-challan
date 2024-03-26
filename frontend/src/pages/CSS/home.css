@@ -85,12 +85,16 @@
   
   .photos img {
     width: 100%; /* Make images fill their parent containers */
+    width:23rem
 
   }
-  .photos second{
-    width: 90%;
-    height: 80%;
+
+  .third{
+    height:14rem;
+    margin-top: 0px;
+
   }
+ 
   
   .photos p {
     margin-top: 10px; /* Adjust spacing between image and text */
@@ -101,21 +105,12 @@
   }
   
 
-  .one{
-    width: 600px;
-    height: 100px;
-  }
-  .second{
-    width: 40%;
-    height: 20%;
-    
-  }
 
   .echallan {
     padding: 2rem;
     border-radius: 30px;
     border-radius: 4px;
-    margin: 0 5%;
+    margin: 5% 5%;
     display: flex;
     background-color: aliceblue;
     margin-top: 20px;

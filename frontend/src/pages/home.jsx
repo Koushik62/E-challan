@@ -42,15 +42,15 @@ const Home=()=>{
                 <div className="photos">   
                     <div className="one">
                         <img src={one} alt="" />
-                        <p><span>Search</span> Enter Car Registration number</p>
+                        <p><span>1.Search</span> Enter Car Registration number</p>
                     </div>
                     <div className="second" >
                         <img src={second} alt="" />
-                        <p><span>View</span> View Pending challans</p>
+                        <p><span>2.View</span> View Pending challans</p>
                     </div>
                     <div className="third">
-                        <img src={third} alt="" />
-                        <p><span>Pay</span>Securely pay with vahanfin </p>
+                        <img src={third} alt="" className="third" />
+                        <p><span>3.Pay</span>Securely pay with vahanfin </p>
                     </div>
                     
                 </div>
