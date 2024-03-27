@@ -10,7 +10,8 @@ import axios from 'axios';
 const Home=()=>{
 
     const [rcNumber, setRcNumber] = useState('');
-  const [challanBlacklistDetails, setChallanBlacklistDetails] = useState('');
+    const [challanBlacklistDetails, setChallanBlacklistDetails] = useState('');
+    const [responseMessage, setResponseMessage] = useState('');
 
   const handleViewChallan = () => {
     console.log(rcNumber);
@@ -23,9 +24,8 @@ const Home=()=>{
         challan_blacklist_details: true
       }
     })
-      .then(response => {
-        console.log(response.data);
-        // Handle response from backend if needed
+    .then(response => {
+        setResponseMessage(response.data); // Set the response message
       })
       .catch(error => {
         console.error('Error fetching vehicle details:', error);
@@ -46,28 +46,87 @@ const Home=()=>{
                     </ul>
                 </div>
                 <div className="photo-right">
-      <div>
-        <p>Enter RC Number</p>
-      </div>
+                    <div>
+                        <p>Enter RC Number</p>
+                    </div>
 
-      <div>
-        <input
-          placeholder='Enter RC Number'
-          type='text'
-          value={rcNumber}
-          onChange={e => setRcNumber(e.target.value)}
-        />
-      </div>
+                    <div>
+                        <input
+                        placeholder='Enter RC Number'
+                        type='text'
+                        value={rcNumber}
+                        onChange={e => setRcNumber(e.target.value)}
+                        />
+                    </div>
 
-      
-
-      
-
-      <div>
-        <button onClick={handleViewChallan}>View Challan</button>
-      </div>
+                    <div>
+                        <button onClick={handleViewChallan}>View Challan</button>
+                    </div>
+                </div>
+                {responseMessage && (
+    <div className="popup">
+        <span className="close" onClick={() => setResponseMessage(null)}>&times;</span>
+        <h2>Response Data</h2>
+        <table className="response-table">
+            <thead>
+                <tr>
+                    <th>Field</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                {JSON.parse(responseMessage).map((item, index) => (
+                    <React.Fragment key={index}>
+                        <tr>
+                            <td>Action</td>
+                            <td>{item.action}</td>
+                        </tr>
+                        <tr>
+                            <td>Completed At</td>
+                            <td>{item.completed_at}</td>
+                        </tr>
+                        <tr>
+                            <td>Created At</td>
+                            <td>{item.created_at}</td>
+                        </tr>
+                        <tr>
+                            <td>Error</td>
+                            <td>{item.error}</td>
+                        </tr>
+                        <tr>
+                            <td>Group ID</td>
+                            <td>{item.group_id}</td>
+                        </tr>
+                        <tr>
+                            <td>Message</td>
+                            <td>{item.message}</td>
+                        </tr>
+                        <tr>
+                            <td>Request ID</td>
+                            <td>{item.request_id}</td>
+                        </tr>
+                        <tr>
+                            <td>Status</td>
+                            <td>{item.status}</td>
+                        </tr>
+                        <tr>
+                            <td>Task ID</td>
+                            <td>{item.task_id}</td>
+                        </tr>
+                        <tr>
+                            <td>Type</td>
+                            <td>{item.type}</td>
+                        </tr>
+                    </React.Fragment>
+                ))}
+            </tbody>
+        </table>
     </div>
-                
+)}
+
+
+
+               
             </div>
             <div className="process"> 
                 <div className="heading">
