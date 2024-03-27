@@ -20,89 +20,69 @@ app.use(cors());
 
 const request = require('request');
 
-// Function to make GET request to fetch task details
+const apiKey = '7df1cd02-8bb5-4913-b85a-8034b42b7292';
+const accountId = 'fdc3277c91ce/875ef6a3-3b5c-42ee-9b5c-22edc41f1963';
+
+// Function to fetch task details from Thunder client
 const getTaskDetails = (requestId) => {
-    const apiKey = '7df1cd02-8bb5-4913-b85a-8034b42b7292';
-    const accountId = 'fdc3277c91ce/875ef6a3-3b5c-42ee-9b5c-22edc41f1963';
-    const apiUrl = `https://eve.idfy.com/v3/tasks`;
-    const getRequestUrl = `${apiUrl}?request_id=${requestId}`;
-  
-    const options = {
-      method: 'GET',
-      url: getRequestUrl,
-      headers: {
-        'api-key': apiKey,
-        'account-id': accountId,
-        'Content-Type': 'application/json'
-      }
-    };
-  
-    request(options, (error, response, body) => {
-      if (error) {
-        console.error('Error:', error);
-        res.status(500).send('Error fetching task details');
-        return;
-      }
-  
-      console.log(body);
-  
-      const taskDetails = JSON.parse(body);
-      if (taskDetails.status === "completed") {
-        // Task completed, send response
-        
-      } else if (taskDetails.status === "failed") {
-        // Task still in progress, wait for some time and check again
-        setTimeout(() => {
-          getTaskDetails(requestId); // Recursive call
-        }, 5000); // Wait for 5 seconds before checking again
-      } else {
-        // Handle other statuses if needed
-        //res.status(500).send('Task status: ' + taskDetails.status);
-      }
-    });
+  const apiUrl = `https://eve.idfy.com/v3/tasks`;
+  const getRequestUrl = `${apiUrl}?request_id=${requestId}`;
+
+  const options = {
+    method: 'GET',
+    url: getRequestUrl,
+    headers: {
+      'api-key': apiKey,
+      'account-id': accountId,
+      'Content-Type': 'application/json'
+    }
   };
-  
-  
-  
-  // POST endpoint to handle /challans
-  app.post('/challans', (req, res) => {
-    const apiKey = '7df1cd02-8bb5-4913-b85a-8034b42b7292';
-    const accountId = 'fdc3277c91ce/875ef6a3-3b5c-42ee-9b5c-22edc41f1963';
-    const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_plus'; // Replace with your external API URL
-    const requestData = req.body;
-  
-    // Make a request to the external API
-    const options = {
-      method: 'POST',
-      url: externalApiUrl,
-      headers: {
-        'api-key': apiKey,
-        'account-id': accountId,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(requestData)
-    };
-  
-    request(options, (error, response, body) => {
-      if (error) {
-        console.error('Error:', error);
-        res.status(500).send('Error making request to external API');
-        return;
-      }
-  
-      console.log('Response from external API:', body);
-      
-      const responsebody = JSON.parse(body);
-      const requestId = responsebody.request_id;
-      
-     
-      setTimeout(() => {
-        getTaskDetails(requestId); // Recursive call
-      }, 5000);
-  
-  
-    });
+
+  request(options, (error, response, body) => {
+    if (error) {
+      console.error('Error:', error);
+      return;
+    }
+
+    console.log('Task details:', body);
+    // Send task details to frontend or process it further as needed
   });
+};
+
+// POST endpoint to handle /challans
+app.post('/challans', (req, res) => {
+  const { vehicleNumber } = req.body;
+  const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_plus';
+  const requestData = { rc_number: vehicleNumber };
+
+  const options = {
+    method: 'POST',
+    url: externalApiUrl,
+    headers: {
+      'api-key': apiKey,
+      'account-id': accountId,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  };
+
+  request(options, (error, response, body) => {
+    if (error) {
+      console.error('Error:', error);
+      res.status(500).send('Error making request to external API');
+      return;
+    }
+
+    console.log('Response from external API:', body);
+
+    const responseBody = JSON.parse(body);
+    const requestId = responseBody.request_id;
+
+    setTimeout(() => {
+      getTaskDetails(requestId);
+    }, 5000);
+  });
+});
   
 
   
