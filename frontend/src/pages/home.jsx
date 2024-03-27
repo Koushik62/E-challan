@@ -26,6 +26,7 @@ const Home=()=>{
     })
     .then(response => {
         setResponseMessage(response.data); // Set the response message
+        console.log(response);
       })
       .catch(error => {
         console.error('Error fetching vehicle details:', error);
@@ -67,60 +68,47 @@ const Home=()=>{
     <div className="popup">
         <span className="close" onClick={() => setResponseMessage(null)}>&times;</span>
         <h2>Response Data</h2>
-        <table className="response-table">
-            <thead>
-                <tr>
-                    <th>Field</th>
-                    <th>Value</th>
-                </tr>
-            </thead>
-            <tbody>
-                {JSON.parse(responseMessage).map((item, index) => (
-                    <React.Fragment key={index}>
+        {JSON.parse(responseMessage).map((item, index) => (
+            <div key={index}>
+                <h3>Data {index + 1}</h3>
+                <table className="response-table">
+                    <tbody>
                         <tr>
-                            <td>Action</td>
-                            <td>{item.action}</td>
+                            <td>Registration Number</td>
+                            <td>{item.result.extraction_output.registration_number}</td>
                         </tr>
                         <tr>
-                            <td>Completed At</td>
-                            <td>{item.completed_at}</td>
+                            <td>Manufacturer Model</td>
+                            <td>{item.result.extraction_output.manufacturer_model}</td>
                         </tr>
                         <tr>
-                            <td>Created At</td>
-                            <td>{item.created_at}</td>
+                            <td>Colour</td>
+                            <td>{item.result.extraction_output.colour}</td>
                         </tr>
                         <tr>
-                            <td>Error</td>
-                            <td>{item.error}</td>
+                            <td>Permanent Address</td>
+                            <td>{item.result.extraction_output.permanent_address}</td>
                         </tr>
                         <tr>
-                            <td>Group ID</td>
-                            <td>{item.group_id}</td>
+                            <td>Father's Name</td>
+                            <td>{item.result.extraction_output.father_name}</td>
                         </tr>
                         <tr>
-                            <td>Message</td>
-                            <td>{item.message}</td>
+                            <td>Owner's Name</td>
+                            <td>{item.result.extraction_output.owner_name}</td>
                         </tr>
                         <tr>
-                            <td>Request ID</td>
-                            <td>{item.request_id}</td>
+                            <td>Registration Date</td>
+                            <td>{item.result.extraction_output.registration_date}</td>
                         </tr>
                         <tr>
-                            <td>Status</td>
-                            <td>{item.status}</td>
+                            <td>Fitness Upto</td>
+                            <td>{item.result.extraction_output.fitness_upto}</td>
                         </tr>
-                        <tr>
-                            <td>Task ID</td>
-                            <td>{item.task_id}</td>
-                        </tr>
-                        <tr>
-                            <td>Type</td>
-                            <td>{item.type}</td>
-                        </tr>
-                    </React.Fragment>
-                ))}
-            </tbody>
-        </table>
+                    </tbody>
+                </table>
+            </div>
+        ))}
     </div>
 )}
 
