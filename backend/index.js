@@ -23,37 +23,14 @@ const request = require('request');
 const apiKey = '7df1cd02-8bb5-4913-b85a-8034b42b7292';
 const accountId = 'fdc3277c91ce/875ef6a3-3b5c-42ee-9b5c-22edc41f1963';
 
-// Function to fetch task details from Thunder client
-const getTaskDetails = (requestId) => {
-  const apiUrl = `https://eve.idfy.com/v3/tasks`;
-  const getRequestUrl = `${apiUrl}?request_id=${requestId}`;
-
-  const options = {
-    method: 'GET',
-    url: getRequestUrl,
-    headers: {
-      'api-key': apiKey,
-      'account-id': accountId,
-      'Content-Type': 'application/json'
-    }
-  };
-
-  request(options, (error, response, body) => {
-    if (error) {
-      console.error('Error:', error);
-      return;
-    }
-
-    console.log('Task details:', body);
-    // Send task details to frontend or process it further as needed
-  });
-};
 
 // POST endpoint to handle /challans
 app.post('/challans', (req, res) => {
-  const { vehicleNumber } = req.body;
+   
+  console.log(req.body)
   const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_plus';
-  const requestData = { rc_number: vehicleNumber };
+  const requestData = req.body;
+  console.log(requestData)
 
   const options = {
     method: 'POST',
@@ -76,10 +53,31 @@ app.post('/challans', (req, res) => {
     console.log('Response from external API:', body);
 
     const responseBody = JSON.parse(body);
+    console.log(responseBody)
     const requestId = responseBody.request_id;
 
-    setTimeout(() => {
-      getTaskDetails(requestId);
+    setTimeout( () => {
+      const apiUrl = 'https://eve.idfy.com/v3/tasks';
+  const getRequestUrl = `${apiUrl}?request_id=${requestId}`;
+  const options = {
+    method: 'GET',
+    url: getRequestUrl,
+    headers: {
+      'api-key': apiKey,
+      'account-id': accountId,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  request(options, (error, response, body) => {
+    if (error) {
+      console.error('Error:', error);
+      return;
+    }
+
+    res.status(200).json(body);
+    // Send task details to frontend or process it further as needed
+  });
     }, 5000);
   });
 });
@@ -112,5 +110,3 @@ app.listen(port, (error)=>{
         console.log("Error"+error);
     }
 })
-
-

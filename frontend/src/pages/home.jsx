@@ -9,10 +9,20 @@ import axios from 'axios';
 
 const Home=()=>{
 
-    const [vehicleNumber, setVehicleNumber] = useState('');
+    const [rcNumber, setRcNumber] = useState('');
+  const [challanBlacklistDetails, setChallanBlacklistDetails] = useState('');
 
   const handleViewChallan = () => {
-    axios.post('http://localhost:4000/challans', { vehicleNumber })
+    console.log(rcNumber);
+    console.log(challanBlacklistDetails);
+    axios.post('http://localhost:4000/challans', {
+      task_id: "74f4c926-250c-43ca-9c53-453e87ceacd1",
+      group_id: "8e16424a-58fc-4ba4-ab20-5bc8e7c3c41e",
+      data: {
+        rc_number: rcNumber,
+        challan_blacklist_details: true
+      }
+    })
       .then(response => {
         console.log(response.data);
         // Handle response from backend if needed
@@ -37,17 +47,21 @@ const Home=()=>{
                 </div>
                 <div className="photo-right">
       <div>
-        <p>Enter Vehicle number</p>
+        <p>Enter RC Number</p>
       </div>
 
       <div>
         <input
-          placeholder='Enter Vehicle number'
+          placeholder='Enter RC Number'
           type='text'
-          value={vehicleNumber}
-          onChange={e => setVehicleNumber(e.target.value)}
+          value={rcNumber}
+          onChange={e => setRcNumber(e.target.value)}
         />
       </div>
+
+      
+
+      
 
       <div>
         <button onClick={handleViewChallan}>View Challan</button>
