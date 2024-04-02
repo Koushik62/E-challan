@@ -1,0 +1,119 @@
+.photo{
+    display: flex;
+    background: url('C:\Users\Gurram koushik reddy\OneDrive - Indian Institute of Technology Bombay\Desktop\E-challan\frontend\src\Components\Assets\photo.png');
+    background-size: cover;
+    height: 492px;
+    padding:40px;
+    margin: 30px;
+
+   
+}
+
+.photo-left{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    color: white;
+    font-size: 26px;
+    margin: 20px;
+}
+
+.photo-right{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 30px;
+    margin: 120px;
+    margin-left: 150px;
+    margin-right: 50px;
+    margin-bottom: 180px;
+    gap: 10px;
+    padding: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+.photo-right p{
+    color: black;
+    font-weight: 600;
+    font-size: 25px;
+    margin: 10px;
+    
+   
+}
+
+.photo-right input{
+    display: flex;
+    flex: 1;
+    width: 300px;
+    height: 28px;
+    border-radius: 20px;
+    
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    cursor: pointer;
+}
+
+.photo-right button{
+    width: 309px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: rgb(11, 11, 227);
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+}
+.response {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .response-table-container {
+    overflow-y: auto;
+    max-height: 300px; /* Adjust the height as needed */
+    margin: 0 auto; /* Center the table */
+  }
+  
+  .response-table {
+    width: 80%; /* Adjust the width as needed */
+    border-collapse: collapse;
+  }
+  
+  .inner-table {
+    width: 100%;
+  }
+  
+  .inner-table th {
+    text-align: left;
+  }
+  
+  .inner-table td {
+    text-align: right;
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .inner-table th, .inner-table td {
+    padding: 8px;
+  }
+  
+
+  .response table {
+    width: 70%;
+    padding: 10rem;
+    margin: 10rem;
+    margin-top: 0rem;
+    margin-bottom: 30rem;
+  }
+  
+  .response th, .response td {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .response th {
+    background-color: #f2f2f2;
+  }

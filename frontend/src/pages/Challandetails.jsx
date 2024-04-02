@@ -2,7 +2,7 @@ import React,{useState} from "react";
 import './CSS/Rcbasic.css'
 
 
-import { Link} from "react-router-dom";
+
 
 import axios from 'axios';
 
@@ -10,7 +10,7 @@ import axios from 'axios';
 
 
 
-const Home=()=>{
+const ChallanDetailsPage=()=>{
 
     const [rcNumber, setRcNumber] = useState('');
     const [showResponse, setShowResponse] = useState(false);
@@ -31,6 +31,7 @@ const Home=()=>{
     })
     .then(response => {
         setResponseMessage(response.data); // Set the response message
+        responseMessage = JSON.parse(responseMessage);
         setShowResponse(true); // Show the response
         
       })
@@ -78,36 +79,16 @@ const Home=()=>{
                     </div>
 
                     <div>
-                       <Link to ='/challan-details' ><button onClick={handleViewChallan}>View Challan Details</button></Link> 
+                       <button onClick={handleViewChallan}>View Challan Details</button> 
                     </div>
                 </div>
 
             </div>
-            
-            {responseMessage && (
-              <div className="popup">
-                <span className="close" onClick={() => setResponseMessage(null)}>&times;</span>
-                    <h2>Response Data</h2>
-
-                    {JSON.parse(responseMessage).map((item, index) => (
-                    <div key={index}>
-                        <h3>Data {index + 1}</h3>
-                        <table className="response-table">
-                            <tbody>
-                              <tr>
-                                <td>Registration Number</td>
-                                <td>{item.result.extraction_output.registration_number}</td>
-                              </tr>
-                            </tbody>
-
-                        
-                          </table>
-          
-                       
-                      </div>
-                      ))}
-              </div>
-              
+            {showResponse && responseMessage && (
+                <div className="response">
+                    <h2>Response Data </h2>
+                    <p>{responseMessage}</p>
+                </div>
             )}
 
             
@@ -120,4 +101,4 @@ const Home=()=>{
     )
 }
 
-export default Home;
+export default ChallanDetailsPage;

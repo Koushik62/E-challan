@@ -3,9 +3,10 @@ import './App.css';
 import Footer from './Components/Footer/Footer.jsx';
 import Navbar from './Components/Navbar/Navbar.jsx';
 import Home from './pages/home.jsx'
-import ChallanDetailsPage from './pages/Challandetails.jsx';
+
 import { Route,Routes,BrowserRouter } from 'react-router-dom';
-import Basicrc from './pages/Challandetails.jsx'
+import Basicrc from './pages/Rcbasic.jsx'
+import AdvRcinfo from './pages/Rcadv.jsx'
 
 function App() {
   return (
@@ -13,9 +14,10 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path ='/' element={<Home/>} />
-        <Route path="/challan-details"  element = {<ChallanDetailsPage />}/>
+        {/* <Route path ='/' element={<Home/>} /> */}
+        {/* <Route path="/challan-details"  element = {<ChallanDetailsPage />}/> */}
         <Route path = '/basicrcinfo' element = {<Basicrc />} />
+        <Route path = '/advrcinfo' element = {<AdvRcinfo />} />
         
       </Routes>
       <Footer/>
