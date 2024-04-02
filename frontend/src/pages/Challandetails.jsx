@@ -1,9 +1,6 @@
 import React,{useState} from "react";
-import './CSS/home.css'
-import one from '../Components/Assets/carphoto.png'
-import second from '../Components/Assets/2nd.png'
-import third from '../Components/Assets/3rd.png'
-import whatisechallan from '../Components/Assets/whatisechallan.png'
+import './CSS/Rcbasic.css'
+
 
 import { Link} from "react-router-dom";
 
@@ -16,7 +13,7 @@ import axios from 'axios';
 const Home=()=>{
 
     const [rcNumber, setRcNumber] = useState('');
-   
+    const [showResponse, setShowResponse] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
     const [chassis, setChassisNumber] = useState('');
 
@@ -34,7 +31,7 @@ const Home=()=>{
     })
     .then(response => {
         setResponseMessage(response.data); // Set the response message
-        
+        setShowResponse(true); // Show the response
         
       })
       .catch(error => {
@@ -82,48 +79,36 @@ const Home=()=>{
 
                     <div>
                        <Link to ='/challan-details' ><button onClick={handleViewChallan}>View Challan Details</button></Link> 
-                        
-                        
-                        
                     </div>
                 </div>
+
+            </div>
+            
+            {responseMessage && (
+              <div className="popup">
+                <span className="close" onClick={() => setResponseMessage(null)}>&times;</span>
+                    <h2>Response Data</h2>
+
+                    {JSON.parse(responseMessage).map((item, index) => (
+                    <div key={index}>
+                        <h3>Data {index + 1}</h3>
+                        <table className="response-table">
+                            <tbody>
+                              <tr>
+                                <td>Registration Number</td>
+                                <td>{item.result.extraction_output.registration_number}</td>
+                              </tr>
+                            </tbody>
+
+                        
+                          </table>
+          
+                       
+                      </div>
+                      ))}
+              </div>
               
-
-
-
-               
-            </div>
-            <div className="process"> 
-                <div className="heading">
-                    <h2>How to Check& Pay Traffic Challan?</h2>
-                </div>  
-                <div className="photos">   
-                    <div className="one">
-                        <img src={one} alt="" />
-                        <p><span>1.Search</span> Enter Car Registration number</p>
-                    </div>
-                    <div className="second" >
-                        <img src={second} alt="" />
-                        <p><span>2.View</span> View Pending challans</p>
-                    </div>
-                    <div className="third">
-                        <img src={third} alt="" className="third" />
-                        <p><span>3.Pay</span>Securely pay with vahanfin </p>
-                    </div>
-                    
-                </div>
-
-            </div>
-            <div className="echallan">
-                <img src ={whatisechallan} alt=""/>
-                <div>
-                    <h2>What is a Traffic eChallan?</h2>
-                    <p>
-                        A traffic eChallan is a digital traffic violation challan that is issued by the traffic police, traffic cameras or transport authorities in India.  As opposed to offline methods of traffic eChallan payment, online payment is convenient, time-saving, and can be done using multiple payment methods including NetBanking, UPI, Credit Card, Debit Card, or a digital wallet. It is also more transparent and gives you an electronic record of the payment you have made.
-                    </p>
-                </div>
-                
-            </div>
+            )}
 
             
            

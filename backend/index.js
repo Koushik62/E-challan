@@ -28,7 +28,7 @@ const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
 app.post('/challans', (req, res) => {
    
   console.log(req.body)
-  const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_plus';
+  const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_challan';
   const requestData = req.body;
   console.log(requestData)
 
