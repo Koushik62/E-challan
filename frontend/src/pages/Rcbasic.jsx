@@ -4,17 +4,52 @@ import './CSS/Rcbasic.css'
 
 const Rcbasic =()=>{
 
-
+ 
 
 
     const [rcNumber, setRcNumber] = useState('');
     const [showResponse, setShowResponse] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
     const [chassis, setChassisNumber] = useState('');
+
+    // const handleViewChallan = async () => {
+    //   try {
+    //     const token = localStorage.getItem('auth-token'); // Get the auth-token from localStorage
+    //     console.log(token);
+    //     const config = {
+    //       headers: {
+    //         Authorization: `Bearer ${token}` // Include the auth-token in the Authorization header
+    //       }
+    //     };
+  
+    //     // Send request to decrement credits
+    //     await axios.post('http://localhost:4000/credits', {}, config);
+  
+    //     // Proceed with viewing the challan details
+    //     // Send request to view challan
+    //     const response = await axios.post('http://localhost:4000/challans', {
+    //       task_id: "15cb1267-c399-44ff-87c1-5309e5ae65fe",
+    //       group_id: "4ef2309c-890a-4579-9353-e003a68be194",
+    //       data: {
+    //         rc_number: rcNumber,
+    //         chassis_number: chassis
+    //       }
+    //     }, config);
+  
+    //     // Handle the response for viewing the challan details
+    //     console.log('Challan details:', response.data);
+    //   } catch (error) {
+    //     console.error('Error viewing challan:', error);
+    //     // Handle error if needed
+    //   }
+    // };
     
     const handleViewChallan = () => {
+    
         console.log(rcNumber);
-        
+      
+        const token = localStorage.getItem('auth-token');
+        console.log(token);
        
         axios.post('http://localhost:4000/challans', {
             "task_id": "15cb1267-c399-44ff-87c1-5309e5ae65fe",
@@ -27,15 +62,45 @@ const Rcbasic =()=>{
         .then(response => {
             const parsedResponse = JSON.parse(response.data);
             setResponseMessage(parsedResponse);
-            // console.log(response.data)
-
             setShowResponse(true); // Show the response
-            // const ResponseData = JSON.parse(responseMessage);
-            // console.log(ResponseData);
-            // const error = ResponseData[0].error;
-            // console.log('Error:', error);
+          
+          const config = {
+            headers: {
+                Authorization: `Bearer ${token}` // Include the authentication token in the request headers
+            }
+        };
 
-          })
+        axios.post('http://localhost:4000/credits', {}, config)
+        .then(response => {
+            // Credits decremented successfully
+            const data = response.data;
+            console.log('Credits decremented:', data.userCredits);
+            
+            // Proceed with other operations after credits are decremented
+            
+        })
+        .catch(error => {
+            // Error decrementing credits
+            console.error('Error decrementing credits:', error);
+            // Handle error if needed
+        });
+      })
+
+
+
+
+
+          //   const parsedResponse = JSON.parse(response.data);
+          //   setResponseMessage(parsedResponse);
+          //   // console.log(response.data)
+
+          //   setShowResponse(true); // Show the response
+          //   // const ResponseData = JSON.parse(responseMessage);
+          //   // console.log(ResponseData);
+          //   // const error = ResponseData[0].error;
+          //   // console.log('Error:', error);
+
+          // })
           .catch(error => {
             console.error('Error fetching vehicle details:', error);
             // Handle error if needed

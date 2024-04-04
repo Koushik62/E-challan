@@ -53,7 +53,6 @@ const Users = mongoose.model('Users',{
 
 
 
-
 // Crreatind Endpoint for registering 
 app.post('/signup',async(req,res)=>{
   let check = await Users.findOne({email:req.body.email});
@@ -109,8 +108,39 @@ app.post('/login',async(req,res)=>{
 
 
 
+app.post('/credits', (req, res) => {
+  try {
+    
 
+      // Assuming token is sent in the Authorization header
+      const token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, 'secret_ecom');
+      const userId = decoded.user.id;
 
+      // Find the user by ID
+      Users.findById(userId)
+          .then(user => {
+              if (!user) {
+                  return res.status(404).json({ error: 'User not found' });
+              }
+
+              // Decrease user's credits
+              user.credits -= 3; // Decrease by 3 credits
+              return user.save();
+          })
+          .then(updatedUser => {
+              res.status(200).json({ message: 'Challan viewed successfully', userCredits: updatedUser.credits });
+          })
+          .catch(error => {
+              console.error('Error viewing credits:', error);
+              res.status(500).json({ error: 'Internal server error' });
+          });
+  }
+   catch (error) {
+      console.error('Error viewing credits', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
 const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
@@ -118,6 +148,8 @@ const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
 
 // POST endpoint to handle /challans
 app.post('/challans', (req, res) => {
+
+  
    
   console.log(req.body)
   const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_challan';
