@@ -6,6 +6,7 @@ const Rcbasic =()=>{
 
 
 
+
     const [rcNumber, setRcNumber] = useState('');
     const [showResponse, setShowResponse] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
@@ -14,6 +15,7 @@ const Rcbasic =()=>{
     const handleViewChallan = () => {
         console.log(rcNumber);
         
+       
         axios.post('http://localhost:4000/challans', {
             "task_id": "15cb1267-c399-44ff-87c1-5309e5ae65fe",
             "group_id": "4ef2309c-890a-4579-9353-e003a68be194",

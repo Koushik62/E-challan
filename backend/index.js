@@ -4,6 +4,7 @@ const app = express();
 const jwt =require("jsonwebtoken");
 const multer = require("multer");
 const path = require("path");
+const mongoose = require("mongoose");
 const cors = require("cors");
 import('node-fetch').then(({ default: fetch }) => {
     // Use fetch here
@@ -11,14 +12,105 @@ import('node-fetch').then(({ default: fetch }) => {
     console.error('Failed to load node-fetch', err);
 });
 
-
-
-app.use(express.json());
-
+const request = require('request');
 // using this our react will connect to the backend
 app.use(cors());
 
-const request = require('request');
+mongoose.connect('mongodb://localhost:27017/');
+app.use(express.json());
+
+const Users = mongoose.model('Users',{
+  name:{
+      type:String,
+  },
+  email:{
+      type:String,
+      unique:true,
+  },
+  password:{
+      type:String,
+  },
+  
+  date:{
+      type:Date,
+      default:Date.now,
+  },
+  companyname:{
+    type:String,
+  },
+  number:{
+    type:String,
+    
+  },
+  credits: {
+    type: Number,
+    default: 100 // Initial value of credits
+  }
+
+
+})
+
+
+
+
+
+// Crreatind Endpoint for registering 
+app.post('/signup',async(req,res)=>{
+  let check = await Users.findOne({email:req.body.email});
+  if(check){
+      return res.status(400).json({success:false,errors:"existing user found with the same email adress"})
+  }
+  let credits = {};
+ 
+  const user = new Users({
+      name:req.body.username,
+      email:req.body.email,
+      password:req.body.password,
+      companyname:req.body.companyname,
+      number:req.body.number
+  })
+
+  await user.save();
+
+  const data = {
+      user:{
+          id:user.id
+      }
+  }
+
+  const token = jwt.sign(data,'secret_ecom');
+  res.json({success:true,token})
+
+
+})
+
+//creating an endpoint for user login
+app.post('/login',async(req,res)=>{
+  let user = await Users.findOne({email:req.body.email});
+  if(user){
+      const passCompare = req.body.password === user.password;
+      if(passCompare){
+          const data = {
+              user:{
+                  id:user.id
+              }
+          }
+          const token = jwt.sign(data,'secret_ecom');
+          res.json({success:true,token});
+      }
+      else{
+          res.json({success:false,errors:"Wrong Password"}) 
+      }
+  }
+  else{
+      res.json({success:false,errors:"Wrong Email Id"})
+  }
+})
+
+
+
+
+
 
 const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
 const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
