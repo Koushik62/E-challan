@@ -51,6 +51,19 @@ const Users = mongoose.model('Users',{
 })
 
 
+// Backend API endpoint to fetch all users
+app.get('/users', async (req, res) => {
+  try {
+      const users = await Users.find(); // Assuming Users is your Mongoose model
+      res.status(200).json(users);
+  } catch (error) {
+      console.error('Error fetching users:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 
 
 // Crreatind Endpoint for registering 
@@ -105,6 +118,28 @@ app.post('/login',async(req,res)=>{
       res.json({success:false,errors:"Wrong Email Id"})
   }
 })
+
+// get request it getch intial details 
+app.get('/credits', async (req, res) => {
+  try {
+    // Assuming token is sent in the Authorization header
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'secret_ecom');
+    const userId = decoded.user.id;
+
+    // Find the user by ID
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ userCredits: user.credits });
+  } catch (error) {
+    console.error('Error fetching user credits:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
 
 
 

@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState,useEffect} from "react";
 import axios from 'axios';
 import './CSS/Rcbasic.css'
 
@@ -6,43 +6,36 @@ const Rcbasic =()=>{
 
  
 
-
+    const [credits, setCredits] = useState(0);
     const [rcNumber, setRcNumber] = useState('');
     const [showResponse, setShowResponse] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
     const [chassis, setChassisNumber] = useState('');
 
-    // const handleViewChallan = async () => {
-    //   try {
-    //     const token = localStorage.getItem('auth-token'); // Get the auth-token from localStorage
-    //     console.log(token);
-    //     const config = {
-    //       headers: {
-    //         Authorization: `Bearer ${token}` // Include the auth-token in the Authorization header
-    //       }
-    //     };
+
+    useEffect(() => {
+      // Fetch user's credits when the component mounts
+      fetchUserCredits();
+    }, []);
   
-    //     // Send request to decrement credits
-    //     await axios.post('http://localhost:4000/credits', {}, config);
+    const fetchUserCredits = () => {
+      const token = localStorage.getItem('auth-token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
   
-    //     // Proceed with viewing the challan details
-    //     // Send request to view challan
-    //     const response = await axios.post('http://localhost:4000/challans', {
-    //       task_id: "15cb1267-c399-44ff-87c1-5309e5ae65fe",
-    //       group_id: "4ef2309c-890a-4579-9353-e003a68be194",
-    //       data: {
-    //         rc_number: rcNumber,
-    //         chassis_number: chassis
-    //       }
-    //     }, config);
+      axios.get('http://localhost:4000/credits', config)
+        .then(response => {
+          const { userCredits } = response.data;
+          setCredits(userCredits);
+        })
+        .catch(error => {
+          console.error('Error fetching user credits:', error);
+        });
+    };
   
-    //     // Handle the response for viewing the challan details
-    //     console.log('Challan details:', response.data);
-    //   } catch (error) {
-    //     console.error('Error viewing challan:', error);
-    //     // Handle error if needed
-    //   }
-    // };
     
     const handleViewChallan = () => {
     
@@ -75,6 +68,8 @@ const Rcbasic =()=>{
             // Credits decremented successfully
             const data = response.data;
             console.log('Credits decremented:', data.userCredits);
+            const { userCredits } = response.data;
+            setCredits(userCredits)
             
             // Proceed with other operations after credits are decremented
             
@@ -110,6 +105,11 @@ const Rcbasic =()=>{
 
     return (
         <div className="home">
+
+          <div className="credits">
+            {/* Display user's credits */}
+            <p><span>User Credits:</span> {credits}</p>
+          </div>
             <div className="photo-right">
                     <div>
                         <p>Enter RC Number</p>
