@@ -1,0 +1,24 @@
+.userinfo{
+    display: flex;
+    
+}
+
+.userdetails{
+    padding: 5rem;
+}
+
+.plusbutton{
+    width: 30px;
+    height: auto;
+   
+}
+.photo{
+    padding-left: 10rem;
+    padding-top: 10rem;
+}
+
+.photo img{
+    border-radius:150px;
+   
+
+}
