@@ -1,0 +1,17 @@
+.home{
+    display: flex;
+    color: black;
+}
+
+.home-left{
+    flex: 1;
+
+}
+
+.home-left input{
+    width: 3rem;
+    padding: 10rem;
+}
+.home-right{
+    flex:1;
+} 

@@ -8,6 +8,7 @@ import { Route,Routes,BrowserRouter } from 'react-router-dom';
 import Basicrc from './pages/Rcbasic.jsx'
 import AdvRcinfo from './pages/Rcadv.jsx'
 import LoginSignup from './pages/login.jsx';
+import AddCredits from './pages/AddCredits.jsx'
 function App() {
   return (
     <div>
@@ -20,6 +21,7 @@ function App() {
         <Route path = '/advrcinfo' element = {<AdvRcinfo />} />
         <Route path='/login' element={<LoginSignup/>} />
         
+        <Route path='/addcredits' element={<AddCredits/>} />
       </Routes>
       <Footer/>
     </BrowserRouter> 

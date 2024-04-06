@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios';
 import './CSS/Rcbasic.css'
-
+import Rcimage from '../Components/Assets/carimage.png'
 const Rcbasic =()=>{
 
  
@@ -81,21 +81,6 @@ const Rcbasic =()=>{
         });
       })
 
-
-
-
-
-          //   const parsedResponse = JSON.parse(response.data);
-          //   setResponseMessage(parsedResponse);
-          //   // console.log(response.data)
-
-          //   setShowResponse(true); // Show the response
-          //   // const ResponseData = JSON.parse(responseMessage);
-          //   // console.log(ResponseData);
-          //   // const error = ResponseData[0].error;
-          //   // console.log('Error:', error);
-
-          // })
           .catch(error => {
             console.error('Error fetching vehicle details:', error);
             // Handle error if needed
@@ -105,113 +90,98 @@ const Rcbasic =()=>{
 
     return (
         <div className="home">
-
-          <div className="credits">
-            {/* Display user's credits */}
-            <p><span>User Credits:</span> {credits}</p>
-          </div>
-            <div className="photo-right">
-                    <div>
-                        <p>Enter RC Number</p>
-                    </div>
-
-                    <div>
-                        <input
-                        placeholder='Enter RC Number'
-                        type='text'
-                        value={rcNumber}
-                        onChange={e => setRcNumber(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
-                        <input
-                        placeholder='Enter Chassis no'
-                        type='text'
-                        value={chassis}
-                        onChange={e => setChassisNumber(e.target.value)}
-                        />
-                    </div>
-
-                    <div>
-                       <button onClick={handleViewChallan}>View Challan Details</button> 
-                    </div>
-                </div>
-
-            <div> 
-            
-                {/* {showResponse && responseMessage && (
-                    
-                    <div className="response">
-                    
-                        <h2>Response Data</h2>
-                        <p>{responseMessage}</p>
-                        
-                       
-                    </div>
-                    
-                 )} */}
-
-                 {/* {showResponse && responseMessage && Array.isArray(responseMessage) && (
-  <div className="response">
-    <h2>Response Data</h2>
-    <div className="response-table-container">
-      <table className="response-table">
-        <tbody>
-          {responseMessage.map((item, index) => (
-            <tr key={index}>
-              <td>
-                <table className="inner-table">
-                  <tbody>
-                    <tr><th>Action</th><td>{item.action}</td></tr>
-                    <tr><th>Completed At</th><td>{item.completed_at}</td></tr>
-                    <tr><th>Created At</th><td>{item.created_at}</td></tr>
-                    <tr><th>Error</th><td>{item.error}</td></tr>
-                  </tbody>
-                </table>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  </div>
-)} */}
-
-{showResponse && responseMessage && Array.isArray(responseMessage) && (
-  <div className="response">
-    <h2>Response Data</h2>
-    <div className="response-table-container">
-      
-          {responseMessage.map((item, index) => (
-            <div key={index}>
-              
-                <table className="response-table">
-                  <tbody>
-                    <tr>
-                        <td>Action</td>
-                        <td>{item.action}</td>
-                    </tr>
-                    <tr><td>Completed At</td><td>{item.completed_at}</td></tr>
-                    <tr><td>Created At</td><td>{item.created_at}</td></tr>
-                    <tr><td>Error</td><td>{item.error}</td></tr>
-                  </tbody>
-                </table>
-            
-            </div>
-          ))}
         
-    </div>
-  </div>
-)}
+            <div class="container">
+              <div class="row justify-content-end">
+                <div class="col-md-3">
+                  <div class="card text-center credits shadow-sm">
+                    <div class="card-body">
+                      <p><span><strong>User Credits:</strong></span> {credits}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
+          <div className="hero">
+
+            <div className="photo-left">
+                
+              <h2>Hi! Haven't you checked you RC details yet???</h2>
+              <p><strong>Step1:</strong> Enter your Rc number</p>
+              <p><strong>Step2:</strong> Enter your chassis number</p>
+
+            </div>
+            <div className="photo-right">
+  <div className="heading">
+    <p>Enter Vehicle Number</p>
+  </div>
+
+  <div className="details">
+    <input
+      placeholder="Enter RC Number"
+      type="text"
+      value={rcNumber}
+      onChange={e => setRcNumber(e.target.value)}
+    />
+  </div>
+
+  <div className="details">
+    <input
+      placeholder="Enter Chassis Number"
+      type="text"
+      value={chassis}
+      onChange={e => setChassisNumber(e.target.value)}
+    />
+  </div>
+
+  <div className="viewbutton">
+    <button onClick={handleViewChallan}>View Details</button>
+  </div>
+</div>
+
+          </div>
+
+            
+         
+       
+    
+                  <div className="response">
+                    {showResponse && responseMessage && Array.isArray(responseMessage) && (
+                      <div className="response">
+                        <h2>Response Data</h2>
+                        <div className="response-table-container">
+                          
+                              {responseMessage.map((item, index) => (
+                                <div key={index}>
+                                  
+                                    <table className="response-table">
+                                      <tbody>
+                                        <tr>
+                                            <td>Action</td>
+                                            <td>{item.action}</td>
+                                        </tr>
+                                        <tr><td>Completed At</td><td>{item.completed_at}</td></tr>
+                                        <tr><td>Created At</td><td>{item.created_at}</td></tr>
+                                        <tr><td>Error</td><td>{item.error}</td></tr>
+                                      </tbody>
+                                    </table>
+                                
+                                </div>
+                              ))}
+                            
+                        </div>
+                      </div>
+                    )}
+
+                    </div>               
 
 
 
             
-                </div>
+      </div>
            
-        </div>
+      
     )
 }
 
