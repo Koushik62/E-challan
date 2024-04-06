@@ -1,6 +1,6 @@
 .photo{
     display: flex;
-    background: url('C:\Users\Gurram koushik reddy\OneDrive - Indian Institute of Technology Bombay\Desktop\E-challan\frontend\src\Components\Assets\photo.png');
+    
     background-size: cover;
     height: 492px;
     padding:40px;

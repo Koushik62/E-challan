@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import './CSS/Addcredits.css'
+import './CSS/addcredits.css'
 
 
 const states = [
@@ -103,15 +103,15 @@ const AddCredits = () => {
         <h2>Add Live Credits</h2>
        
         <div className="procced">
-        <input 
-          placeholder="Eg.1000" 
-          value={credits}
-          onChange={(e)=> setCredits(e.target.value)}
+          <input 
+            placeholder="Eg.1000" 
+            value={credits}
+            onChange={(e)=> setCredits(e.target.value)}
+            
+          />
           
-        />
-        
-        
-        <button onClick={handleClick} type="submit">Proceed</button>
+          
+          <button onClick={handleClick} type="submit">Proceed</button>
         </div>
        
         {click &&(
