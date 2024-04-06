@@ -8,9 +8,9 @@
 
 }
 
-.home-left input{
-    width: 3rem;
-    padding: 10rem;
+.proceed{
+    display: flex;
+    flex-direction: column;
 }
 .home-right{
     flex:1;

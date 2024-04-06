@@ -102,15 +102,17 @@ const AddCredits = () => {
         <h1>Credits</h1>
         <h2>Add Live Credits</h2>
        
-        
+        <div className="procced">
         <input 
           placeholder="Eg.1000" 
           value={credits}
           onChange={(e)=> setCredits(e.target.value)}
+          
         />
         
         
         <button onClick={handleClick} type="submit">Proceed</button>
+        </div>
        
         {click &&(
           <div>
