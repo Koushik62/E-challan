@@ -106,47 +106,42 @@ const Rcbasic =()=>{
           <div className="hero">
 
             <div className="photo-left">
-                
-              <h2>Hi! Haven't you checked you RC details yet???</h2>
-              <p><strong>Step1:</strong> Enter your Rc number</p>
-              <p><strong>Step2:</strong> Enter your chassis number</p>
+                    <div className="photoheading">
+                      <p>Enter Vehicle Number</p>
+                    </div>
 
+                    <div className="photocreditusage"> 
+                        <p>Input</p>
+                        <p className="creditsperusage">3 credits per usage</p>
+                    </div>
+
+                    <div className="rcdetails">
+                      <input
+                        placeholder="Enter RC Number"
+                        type="text"
+                        value={rcNumber}
+                        onChange={e => setRcNumber(e.target.value)}
+                      />
+                    </div>
+
+                  <div className="rcdetails">
+                    <input
+                      placeholder="Enter Chassis Number"
+                      type="text"
+                      value={chassis}
+                      onChange={e => setChassisNumber(e.target.value)}
+                    />
+                  </div>
+
+              <div className="viewbutton">
+                <button onClick={handleViewChallan}>View Details</button>
+              </div>
             </div>
+            <div className="verticalline"></div>
             <div className="photo-right">
-  <div className="heading">
-    <p>Enter Vehicle Number</p>
-  </div>
+                <h2>Output</h2>
+                  <div>
 
-  <div className="details">
-    <input
-      placeholder="Enter RC Number"
-      type="text"
-      value={rcNumber}
-      onChange={e => setRcNumber(e.target.value)}
-    />
-  </div>
-
-  <div className="details">
-    <input
-      placeholder="Enter Chassis Number"
-      type="text"
-      value={chassis}
-      onChange={e => setChassisNumber(e.target.value)}
-    />
-  </div>
-
-  <div className="viewbutton">
-    <button onClick={handleViewChallan}>View Details</button>
-  </div>
-</div>
-
-          </div>
-
-            
-         
-       
-    
-                  <div className="response">
                     {showResponse && responseMessage && Array.isArray(responseMessage) && (
                       <div className="response">
                         <h2>Response Data</h2>
@@ -155,17 +150,59 @@ const Rcbasic =()=>{
                               {responseMessage.map((item, index) => (
                                 <div key={index}>
                                   
-                                    <table className="response-table">
-                                      <tbody>
-                                        <tr>
-                                            <td>Action</td>
-                                            <td>{item.action}</td>
-                                        </tr>
-                                        <tr><td>Completed At</td><td>{item.completed_at}</td></tr>
-                                        <tr><td>Created At</td><td>{item.created_at}</td></tr>
-                                        <tr><td>Error</td><td>{item.error}</td></tr>
-                                      </tbody>
-                                    </table>
+                                    
+                                     
+                                      <div className="table">
+                                          <div  className="table-left"><p>Action</p></div>
+                                            
+                                          <div className="table-right"><p>{item.action}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="line"></div>
+                                      <div className="table">
+                                          <div className="table-left"><p>Completed At</p></div>
+                                            
+                                          <div className="table-right"><p>{item.completed_at}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="line"></div>
+                                      <div className="table">
+                                          <div className="table-left"><p>Created At</p></div>
+                                            
+                                          <div className="table-right"><p>{item.created_at}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="line"></div>
+                                      <div className="table">
+                                          <div className="table-left"><p>Error</p></div>
+                                            
+                                          <div className="table-right"><p>{item.error}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="line"></div>
+                                      <div className="table">
+                                          <div className="table-left"><p>task_id</p></div>
+                                            
+                                          <div className="table-right"><p>{item.task_id}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="line"></div>
+                                      <div className="table">
+                                          <div className="table-left"><p>type</p></div>
+                                            
+                                          <div className="table-right"><p>{item.type}</p></div>
+                                            
+                                        
+                                      </div>
+                                       
+                                        
+                                    
+                                   
                                 
                                 </div>
                               ))}
@@ -174,7 +211,15 @@ const Rcbasic =()=>{
                       </div>
                     )}
 
-                    </div>               
+                     </div>
+              </div>
+          </div>
+
+            
+         
+       
+    
+                             
 
 
 
