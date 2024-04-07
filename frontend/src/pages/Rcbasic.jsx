@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios';
 import './CSS/Rcbasic.css'
-import Rcimage from '../Components/Assets/carimage.png'
+
 const Rcbasic =()=>{
 
  
@@ -89,7 +89,7 @@ const Rcbasic =()=>{
       };
 
     return (
-        <div className="home">
+        <div className="rchome">
         
             <div class="container">
               <div class="row justify-content-end">

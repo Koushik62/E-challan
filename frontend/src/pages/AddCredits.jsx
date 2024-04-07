@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import './CSS/addcredits.css'
+import './addcredits.css'
 
 
 const states = [
@@ -97,12 +97,12 @@ const AddCredits = () => {
 
 
   return (
-    <div className="home">
-      <div className="home-left">
+    <div className="addhome">
+      <div className="addhome-left">
         <h1>Credits</h1>
         <h2>Add Live Credits</h2>
        
-        <div className="procced">
+        <div className="addprocces">
           <input 
             placeholder="Eg.1000" 
             value={credits}
@@ -117,7 +117,7 @@ const AddCredits = () => {
         {click &&(
           <div>
           <form onSubmit={handleSubmit}>
-          <div className="form-group">
+          <div className="addform-group">
             <label htmlFor="companyName">Company Name*</label>
             <input
               type="text"
@@ -128,7 +128,7 @@ const AddCredits = () => {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="addform-group">
             <label htmlFor="address">Address*</label>
             <textarea
               id="address"
@@ -138,21 +138,21 @@ const AddCredits = () => {
               required
             />
           </div>
-
-          <button onClick={handleClick}>
-          {click ? 'Hide States' : 'Show All States'}
-          </button>
+          <div className="addform-group">
+          <label htmlFor="statesbutton">State*</label>  {/* Label for the select element */}
           {click && (
-          <select value={selectedState} onChange={handleStateChange}>
-            <option value="">-- Select State (optional) --</option>
-            {states.map((state) => (
-              <option key={state} value={state}>
-                {state}
-              </option>
-            ))}
-          </select>
-        )}
-          <div className="form-group">
+            <select id="statesbutton" value={selectedState} onChange={handleStateChange}>
+              <option value="">{selectedState || 'Maharastra'}</option> {/* Placeholder */}
+              {states.map((state) => (
+                <option key={state} value={state}>
+                  {state}
+                </option>
+              ))}
+            </select>
+          )}
+        </div>
+          
+          <div className="addform-group">
             <label>Do you have a GST number?*</label>
             <div className="radio-group">
               <label htmlFor="hasGstYes">
@@ -166,7 +166,7 @@ const AddCredits = () => {
                 />
                 Yes
               </label>
-              <label htmlFor="hasGstNo">
+              <label htmlFor="addhasGstNo">
                 <input
                   type="radio"
                   id="hasGstNo"
@@ -174,15 +174,16 @@ const AddCredits = () => {
                   value={false}
                   checked={!hasGst}
                   onChange={(e) => setHasGst(false)}
+                  
                 />
                 No
               </label>
             </div>
           </div>
           {hasGst && (
-            <div className="form-group">
-              <label htmlFor="gstNumber">GST Number (optional if no GST):</label>
-              <input
+            <div className="addform-group">
+              <label htmlFor="gstNumber">GST Number*</label>
+              <input 
                 type="text"
                 id="gstNumber"
                 name="gstNumber"
@@ -196,21 +197,49 @@ const AddCredits = () => {
         </div>
         )}
 
-        <div className="pricing">
-            <p>Pricing</p>
-
-        </div>
+        
       </div>
-      <div className="home-right">
+      <div className="addhome-right">
         {click && (
-          <div className="credit-details">
+          <div className="addcredit-details">
             <h2>Credit Amount Payable</h2>
-            <p>Credit Balance: <span id="creditBalance">{credits}</span></p>
-            <p>Desired Amount: <span id="amount">{credits}</span></p>
-            <p>SGST: <span id="sgst">{credits*0.09}</span></p>
-            <p>CGST: <span id="cgst"></span>{credits*0.09}</p>
-            <p>Final amount payable  <span></span>{credits*(1.18)}</p>
+            <div className="paymentdetails">
+              <p><strong>Credit Balance:</strong> </p>
+              <p><strong>{credits}</strong></p>
+            </div>
+
+            
+            <div className="hdivider"></div>
+
+            <div className="paymentdetails">
+              <p><strong>Desired Amount:</strong>  </p>
+              <p><strong>₹{credits}</strong></p>
+            </div>
+            
+            <div className="hdivider"></div>
+
+            <div className="paymentdetails">
+              <p style={{ color: 'grey' }}> SGST @ 9%  </p>
+              <p style={{ color: 'grey' }}>₹{(credits * 0.09).toFixed(2)}</p>
+            </div>
+            
+            <div className="hdivider"></div>
+            <div className="paymentdetails" >
+              <p style={{ color: 'grey' }}> CGST @ 9%  </p>
+              <p style={{ color: 'grey' }}>₹{(credits * 0.09).toFixed(2)}</p>
+            </div>
+            <div className="hdivider"></div>
+            <div className="paymentdetails">
+              <p className="finalamountpay" ><strong>Final amount payable</strong> </p>
+              <p className="finalamountpay"> <strong>₹{(credits * 1.18).toFixed(2)}</strong></p>
+            </div>
+            <div className="hdivider1"></div>
+            
+            <div className="Proceedtopayment">
+              <button>Proceed to Payment</button>
+            </div>
           </div>
+          
           
 
         )}
