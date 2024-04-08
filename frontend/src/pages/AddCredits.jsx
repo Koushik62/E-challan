@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { toast } from 'react-toastify';
 import './addcredits.css'
 
 
@@ -51,6 +51,7 @@ const AddCredits = () => {
   const [gstNumber, setGstNumber] = useState("");
   const[credits, setCredits] = useState();
 
+  const [total, setTotal] = useState();
   const [selectedState, setSelectedState] = useState('');
   const handleSubmit = (event) => {
     event.preventDefault(); // Prevent default form submission behavior
@@ -93,6 +94,74 @@ const AddCredits = () => {
   };
 
 
+
+  //payment gateway
+  const handlePayment = (total) => {
+   
+    var options = {
+      key: "rzp_test_LetnicYdIN9c1h",
+      amount: total * 100, // Amount in paisa
+      currency: "INR",
+      name: "Krishicare",
+      description: "Credits Payment",
+      image: "https://your-company-logo-url.png",
+     
+      handler: function (response) {
+        console.log(response);
+        // Add logic to handle payment success
+        toast.success('Payment Successful');
+
+        // Extract payment ID from response
+        const paymentId = response.razorpay_payment_id;
+
+        // Construct order information
+        const orderInfo = {
+          date: new Date().toLocaleString(
+            "en-US",
+            {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            }
+          ),
+          // Add additional order details here if needed
+          paymentId: paymentId
+        };
+
+        // Example: send order information to your backend for processing
+        fetch('/api/createOrder', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderInfo),
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Order created:', data);
+          // Add logic to handle successful order creation
+        })
+        .catch(error => {
+          console.error('Error creating order:', error);
+          // Add logic to handle error
+        });
+      },
+      prefill: {
+        
+        email: "customer@example.com",
+        contact: "9999999999",
+        method: "upi",
+        // Add additional UPI payment details if required
+      },
+      theme: {
+        color: "#528FF0", // Razorpay button color
+      },
+    };
+
+    var pay = new window.Razorpay(options);
+    pay.open();
+    console.log(pay);
+  };
   
 
 
@@ -232,12 +301,13 @@ const AddCredits = () => {
             <div className="hdivider"></div>
             <div className="paymentdetails">
               <p className="finalamountpay" ><strong>Final amount payable</strong> </p>
-              <p className="finalamountpay"> <strong>₹{(credits * 1.18).toFixed(2)}</strong></p>
+               
+              <p className="finalamountpay"> <strong>₹{(credits*1.18).toFixed(2)}</strong></p>
             </div>
             <div className="hdivider1"></div>
             
             <div className="Proceedtopayment">
-              <button>Proceed to Payment</button>
+              <button onClick={()=>handlePayment((credits*1.18).toFixed(2))}  >Proceed to Payment</button>
             </div>
           </div>
           

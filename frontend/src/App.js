@@ -15,7 +15,7 @@ function App() {
     <BrowserRouter>
       <Navbar/>
       <Routes>
-        <Route path ='/' element={<Home/>} />
+        <Route path ='/' element={<Basicrc/>} />
         {/* <Route path="/challan-details"  element = {<ChallanDetailsPage />}/> */}
         <Route path = '/basicrcinfo' element = {<Basicrc />} />
         <Route path = '/advrcinfo' element = {<AdvRcinfo />} />
