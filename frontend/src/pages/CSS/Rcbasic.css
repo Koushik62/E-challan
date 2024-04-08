@@ -4,6 +4,7 @@
 
 .rchome{
   background-color:  rgba(0, 0, 255, 0.018);
+  font-family:'Times New Roman', Times, serif;
 }
 
 .hero{
@@ -29,16 +30,16 @@
   color: #fff; /* White text for better contrast */
 }
 
-.photo-left{
-  flex:1
-}
+
 .photo-left {
   display: flex;
+  flex:1;
   flex-direction: column;
   width: auto;
   height:auto;
   color: black; 
   border-radius: 10px; /* Rounded corners */
+  padding: 20px;
   
 }
 
@@ -71,23 +72,13 @@
   padding-left: 15px;
 
 }
-/* 
-.creditsperusage{
-  font-size: 15px;
-  background-color:rgb(237, 241, 247);
-  
-  
-  color: rgb(46, 58, 89);
-  
-  font-weight: 700;
-  border-radius: 20px;
-} */
 
 
 
 .rcdetails {
   display: flex;
   margin: 0.5rem 0;
+  width: 80%;
 }
 
 .rcdetails input {
@@ -97,18 +88,20 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 1rem;
+  background-color: rgb(232, 240, 254);
+  
 }
 
-.rcdetails:hover input {
-  color: blue;
-}
 
 
 .viewbutton {
   display: flex;
   justify-content: center;
-  margin: 1rem;
+  padding-right: 29rem;
   height: 3rem;
+  
+  
+  
 }
 
 .viewbutton button {
@@ -121,6 +114,7 @@
   transition: background-color 0.3s ease;
   font-size: 1rem;
   font-family:'Times New Roman', Times, serif;
+
   
 }
 
@@ -128,23 +122,96 @@
   background-color: #4049ea; /* Darker blue on button hover */
 }
 
-.photo-right{
-  flex: 1;
-  width: auto;
-  margin-top: 33px;
-  border-radius: 5px;
-  height: auto;
-  width: auto;
-  
+.rcvertical-line {
+  width: 1px;
+  border-left: 1px dotted #000; 
+  margin: 0 10px; 
 }
-.table {
-  display: flex;
-  width: 110%;
-  margin-bottom: 10px; /* Optional spacing */
+
+.rcphoto-right{
+  flex: 1;
+  padding-left: 30px;
+  padding-top: 30px;
+  
+
+}
+.xyz{
+  background-color:white;
+  height: 300px;
+  width: 500px;
+  padding: 10px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.139);
+  margin-bottom: 10rem;
+}
+.rcresponse{
+  background-color:white;
+  height: auto;
+  width: 500px;
+  padding: 10px;
+  margin-bottom: 40px;
+  border: 1px solid rgba(0, 0, 0, 0.139);
+}
+
+
+.rcresponse-table-container{
+  
+  overflow-y: auto; 
+  max-height: 300px;
+  padding: 30px;
   
 }
 
-.table-left,
+
+
+.rcctable {
+  display: flex;
+  background-color: white;
+  
+  padding: 0px;
+  border-bottom: 0.2px solid grey;
+
+}
+.rcctable-left,
+.rcctable-right {
+  flex: 1;
+  font-size: 8px;
+  padding-left: 2px;
+}
+
+.rcctable p{
+  font-size: 17px;
+  font-weight: 600;
+}
+
+
+.rctable {
+  display: flex;
+  background-color: white;
+  gap: 0px;
+  padding: 0px;
+  border-bottom: 0.2px solid grey;
+
+}
+.rctable-left,
+.rctable-right {
+  flex: 1;
+  font-size: 8px;
+  padding-left: 2px;
+}
+
+.rctable p{
+  font-size: 13px;
+  font-weight: 100;
+}
+/* .table {
+  display: flex;
+  width: 110%;
+  margin-bottom: 10px; 
+  
+} */
+
+/* .table-left,
 .table-right {
   flex: 1;
   font-size: 8px;
@@ -166,7 +233,59 @@
   max-height: 300px; 
   overflow-y: auto; 
   width: 100%; 
-}
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

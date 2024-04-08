@@ -137,65 +137,71 @@ const Rcbasic =()=>{
                 <button onClick={handleViewChallan}>View Details</button>
               </div>
             </div>
-            <div className="verticalline"></div>
-            <div className="photo-right">
+            <div className="rcvertical-line"></div>
+            <div className="rcphoto-right">
                 <h2>Output</h2>
-                  <div>
+                <div className={showResponse ? "rcresponse" : "xyz"}>
 
                     {showResponse && responseMessage && Array.isArray(responseMessage) && (
-                      <div className="response">
-                        <h2>Response Data</h2>
-                        <div className="response-table-container">
+                     
+                       
+                        <div className="rcresponse-table-container">
                           
                               {responseMessage.map((item, index) => (
                                 <div key={index}>
                                   
-                                    
+                                <div className="rcctable">
+                                          <div  className="rcctable-left"><p>Field</p></div>
+                                            
+                                          <div className="rcctable-right"><p>Value</p></div>
+                                            
+                                        
+                                      </div>
                                      
-                                      <div className="table">
-                                          <div  className="table-left"><p>Action</p></div>
+                                      <div className="rctable">
+                                          <div  className="rctable-left"><p>Action</p></div>
                                             
-                                          <div className="table-right"><p>{item.action}</p></div>
-                                            
-                                        
-                                      </div>
-                                      <div className="line"></div>
-                                      <div className="table">
-                                          <div className="table-left"><p>Completed At</p></div>
-                                            
-                                          <div className="table-right"><p>{item.completed_at}</p></div>
+                                          <div className="rctable-right"><p>{item.action}</p></div>
                                             
                                         
                                       </div>
-                                      <div className="line"></div>
-                                      <div className="table">
-                                          <div className="table-left"><p>Created At</p></div>
+                                      
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Completed At</p></div>
                                             
-                                          <div className="table-right"><p>{item.created_at}</p></div>
-                                            
-                                        
-                                      </div>
-                                      <div className="line"></div>
-                                      <div className="table">
-                                          <div className="table-left"><p>Error</p></div>
-                                            
-                                          <div className="table-right"><p>{item.error}</p></div>
+                                          <div className="rctable-right"><p>{item.completed_at}</p></div>
                                             
                                         
                                       </div>
-                                      <div className="line"></div>
-                                      <div className="table">
-                                          <div className="table-left"><p>task_id</p></div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Created At</p></div>
                                             
-                                          <div className="table-right"><p>{item.task_id}</p></div>
+                                          <div className="rctable-right"><p>{item.created_at}</p></div>
                                             
                                         
                                       </div>
-                                      <div className="line"></div>
-                                      <div className="table">
-                                          <div className="table-left"><p>type</p></div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Error</p></div>
                                             
-                                          <div className="table-right"><p>{item.type}</p></div>
+                                          <div className="rctable-right"><p>{item.error}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>task_id</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.task_id}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>type</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.type}</p></div>
                                             
                                         
                                       </div>
@@ -208,10 +214,10 @@ const Rcbasic =()=>{
                               ))}
                             
                         </div>
-                      </div>
+                      
                     )}
 
-                     </div>
+                  </div>
               </div>
           </div>
 
