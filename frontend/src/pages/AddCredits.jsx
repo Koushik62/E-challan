@@ -199,6 +199,7 @@ const AddCredits = () => {
 
         
       </div>
+      <div className="addvertical-line"></div>
       <div className="addhome-right">
         {click && (
           <div className="addcredit-details">

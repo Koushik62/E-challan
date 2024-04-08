@@ -1,6 +1,7 @@
 .addhome {
     display: flex;
-    color: black;
+    background-color:  rgba(0, 0, 255, 0.018);
+    font-family:'Times New Roman', Times, serif;
 
   }
   
@@ -116,7 +117,12 @@
 
 
 
-  
+  .addvertical-line {
+    width: 1px;
+    border-left: 1px dotted #000; 
+    margin: 10px 10px; 
+   
+  }
   
   .addhome-right {
     flex: 1;

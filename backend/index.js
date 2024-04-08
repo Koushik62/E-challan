@@ -219,6 +219,41 @@ app.post('/users/:userId/credits', async (req, res) => {
     }
   });
 
+  // for adv rc details
+  app.post('/advcredits', (req, res) => {
+    try {
+      
+
+        // Assuming token is sent in the Authorization header
+        const token = req.headers.authorization.split(' ')[1];
+        const decoded = jwt.verify(token, 'secret_ecom');
+        const userId = decoded.user.id;
+
+        // Find the user by ID
+        Users.findById(userId)
+            .then(user => {
+                if (!user) {
+                    return res.status(404).json({ error: 'User not found' });
+                }
+
+                // Decrease user's credits
+                user.credits -= 8; // Decrease by 3 credits
+                return user.save();
+            })
+            .then(updatedUser => {
+                res.status(200).json({ message: 'Challan viewed successfully', userCredits: updatedUser.credits });
+            })
+            .catch(error => {
+                console.error('Error viewing credits:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            });
+    }
+    catch (error) {
+        console.error('Error viewing credits', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
   const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
   const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
 
