@@ -81,6 +81,34 @@ app.get('/users/:userId', async (req, res) => {
 });
 
 
+// payment 
+// Update user credits endpoint
+app.post('/api/updateCredits', async (req, res) => {
+  try {
+    const { paymentId, total } = req.body;
+
+    // Verify payment details with Razorpay (You may need to implement this logic)
+
+    // Assuming payment verification is successful, update user's credits
+    const userId = req.user.id; // Assuming you have authentication and the user ID is available in the request
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Add the new credits to the existing credits
+    user.credits += parseInt(total);
+    await user.save(); // Save the updated user
+
+    res.status(200).json({ message: 'Credits added successfully', userCredits: user.credits });
+  } catch (error) {
+    console.error('Error adding credits:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
 
 // Update user credits endpoint
 app.post('/users/:userId/credits', async (req, res) => {

@@ -3,14 +3,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 50px;
+    gap: 3px;
     background-color: #1a1a1a;
     color: white;
+    font-family: 'Times New Roman', Times, serif;
+
 }
 .footer-logo{
     display: flex;
     align-items: center;
-    gap: 20px;
+    margin-bottom: 0px;
+    padding-bottom: 0px;
+    
 }
 .footer-logo p{
    
@@ -24,6 +28,7 @@
     gap: 50px;
     color: white;
     font-size: 20px;
+  
 }
 .footer-links li{
     cursor: pointer;
@@ -34,7 +39,7 @@
 }
 .footer-icon-container{
     padding: 10px;
-    padding-bottom: 6px;
+    margin-bottom: 0px;
     background:#fbfbfb;
     border: 1px solid #ebebeb;
 
