@@ -20,6 +20,7 @@ const Navbar =()=>{
                 <li onClick={()=>{setMenu("Basic RC info")}}><Link style = {{textDecoration:'none'}}  to = '/basicrcinfo'>Basic Rc info</Link></li>
                 <li onClick={()=>{setMenu("Adv Rc info")}}><Link style = {{textDecoration:'none'}} to = '/advrcinfo'>Adv Rc info</Link> </li>
                 <li onClick={()=>{setMenu("Payment")}}><Link style = {{textDecoration:'none'}}  to = '/addcredits'>Add Credits</Link></li>
+                <li onClick={()=>{setMenu("challan")}}><Link style = {{textDecoration:'none'}}  to = '/challan'>Challan</Link></li>
             </ul>
                     {localStorage.getItem('auth-token')
                     ?<button onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Logout</button>

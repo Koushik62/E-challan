@@ -127,7 +127,7 @@ app.post('/adminlogin', async (req, res) => {
       let user = await Users_admin.findOne({ email: req.body.email });
       if (user) {
           // Compare hashed passwords
-          const passCompare = await bcrypt.compare(req.body.password, user.password);
+          const passCompare = bcrypt.compare(req.body.password, user.password);
           if (passCompare) {
               // Generate JWT token
               const token = jwt.sign({ user: { id: user.id } }, 'secret_ecom');
@@ -271,7 +271,10 @@ app.post('/login', async (req, res) => {
       let user = await Users.findOne({ email: req.body.email });
       if (user) {
           // Compare hashed passwords
-          const passCompare = await bcrypt.compare(req.body.password, user.password);
+          console.log(req.body.password)
+          const passCompare = bcrypt.compare(req.body.password, user.password);
+          console.log(bcrypt.hash(req.body.password, 10))
+          console.log(passCompare);
           if (passCompare) {
               // Generate JWT token
               const token = jwt.sign({ user: { id: user.id } }, 'secret_ecom');
@@ -379,16 +382,18 @@ app.post('/advcredits', (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
+//Dummy account credentials
+const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
+const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
 
-// const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
-// const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
 
-const apiKey  = 'e713633b-ab11-485c-8153-5654c5a0ccd3';
-const accountId = '69b202aee524/c95b76ad-9d0e-4e0f-9ba0-c8b7c640f3a8';
+// Orginal account credentials
+// const apiKey  = 'e713633b-ab11-485c-8153-5654c5a0ccd3';
+// const accountId = '69b202aee524/c95b76ad-9d0e-4e0f-9ba0-c8b7c640f3a8';
 
 
 // POST endpoint to handle /challans
-app.post('/challans', (req, res) => {
+app.post('/basicrc', (req, res) => {
 
   
   
@@ -458,6 +463,67 @@ app.post('/advrc', (req, res) => {
   
   console.log(req.body)
   const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_plus';
+  const requestData = req.body;
+  console.log(requestData)
+
+  const options = {
+    method: 'POST',
+    url: externalApiUrl,
+    headers: {
+      'api-key': apiKey,
+      'account-id': accountId,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)
+  };
+
+  request(options, (error, response, body) => {
+    if (error) {
+      console.error('Error:', error);
+      res.status(500).send('Error making request to external API');
+      return;
+    }
+
+    console.log('Response from external API:', body);
+
+    const responseBody = JSON.parse(body);
+    console.log(responseBody)
+    const requestId = responseBody.request_id;
+
+    setTimeout( () => {
+      const apiUrl = 'https://eve.idfy.com/v3/tasks';
+  const getRequestUrl = `${apiUrl}?request_id=${requestId}`;
+  const options = {
+    method: 'GET',
+    url: getRequestUrl,
+    headers: {
+      'api-key': apiKey,
+      'account-id': accountId,
+      'Content-Type': 'application/json'
+    }
+  };
+
+  request(options, (error, response, body) => {
+    if (error) {
+      console.error('Error:', error);
+      return;
+    }
+
+    res.status(200).json(body);
+    console.log(body);
+    // Send task details to frontend or process it further as needed
+  });
+    }, 10000);
+  });
+});
+
+// challans
+app.post('/challans', (req, res) => {
+
+  
+  
+  console.log(req.body)
+  const externalApiUrl = 'https://eve.idfy.com/v3/tasks/async/verify_with_source/ind_rc_challan';
   const requestData = req.body;
   console.log(requestData)
 

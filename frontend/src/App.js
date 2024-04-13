@@ -9,6 +9,8 @@ import Basicrc from './pages/Rcbasic.jsx'
 import AdvRcinfo from './pages/Rcadv.jsx'
 import LoginSignup from './pages/login.jsx';
 import AddCredits from './pages/AddCredits.jsx'
+
+import Challan from './pages/Challan.jsx';
 function App() {
   return (
     <div>
@@ -20,7 +22,7 @@ function App() {
         <Route path = '/basicrcinfo' element = {<Basicrc />} />
         <Route path = '/advrcinfo' element = {<AdvRcinfo />} />
         <Route path='/login' element={<LoginSignup/>} />
-        
+        <Route path='/challan' element={<Challan/>}/>
         <Route path='/addcredits' element={<AddCredits/>} />
       </Routes>
       <Footer/>

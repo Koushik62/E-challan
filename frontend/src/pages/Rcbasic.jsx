@@ -44,7 +44,7 @@ const Rcbasic =()=>{
         const token = localStorage.getItem('auth-token');
         console.log(token);
        
-        axios.post('http://localhost:4000/challans', {
+        axios.post('http://localhost:4000/basicrc', {
             "task_id": "15cb1267-c399-44ff-87c1-5309e5ae65fe",
             "group_id": "4ef2309c-890a-4579-9353-e003a68be194",
           data: {
@@ -122,6 +122,7 @@ const Rcbasic =()=>{
                         onChange={e => setRcNumber(e.target.value)}
                       />
                     </div>
+                
 
                 
 
