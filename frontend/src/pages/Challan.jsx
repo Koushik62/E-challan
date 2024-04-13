@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from "react";
+import React,{useState,useEffect,Link} from "react";
 import axios from 'axios';
 import './CSS/Rcbasic.css'
 
@@ -159,30 +159,55 @@ const Rcbasic =()=>{
                                       </div>
                                      
                                       <div className="rctable">
-                                          <div  className="rctable-left"><p>Action</p></div>
+                                          <div  className="rctable-left"><p>Total pending challans</p></div>
                                             
-                                          <div className="rctable-right"><p>{item.action}</p></div>
+                                          <div className="rctable-right"><p>{item.result.source_output.challan_summary.total_pending_challan}</p></div>
                                             
                                         
                                       </div>
-                                      
+
+                                      <div className="rcline"></div>
                                       <div className="rctable">
-                                          <div className="rctable-left"><p>Completed At</p></div>
+                                          <div  className="rctable-left"><p>Challan number</p></div>
                                             
-                                          <div className="rctable-right"><p>{item.completed_at}</p></div>
+                                          <div className="rctable-right"><p>{item.result.source_output.challan_details[0].challan_number}</p></div>
                                             
                                         
                                       </div>
                                       <div className="rcline"></div>
                                       <div className="rctable">
-                                          <div className="rctable-left"><p>Created At</p></div>
+                                          <div  className="rctable-left"><p>Image url</p></div>
                                             
-                                          <div className="rctable-right"><p>{item.created_at}</p></div>
+                                          <div className="rctable-right"><p><a href="{item.result.source_output.challan_details[0].image_url}" target="_blank">Click here</a>
+</p></div>
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div  className="rctable-left"><p>Challan Status</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.source_output.challan_details[0].challan_status}</p></div>
                                             
                                         
                                       </div>
                                       <div className="rcline"></div>
-                                      
+                                      <div className="rctable">
+                                          <div  className="rctable-left"><p>Amount</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.source_output.challan_details[0].amount}</p></div>
+                                            
+                                        
+                                      </div>
+                                     
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div  className="rctable-left"><p>Patment Url</p></div>
+                                            
+                                          <div className="rctable-right"><p>{<a href="{item.result.source_output.challan_details[0].payment_url}" target="_blank">Click here</a>
+}</p></div>
+                                            
+                                        
+                                      </div>
                                     
                                    
                                 

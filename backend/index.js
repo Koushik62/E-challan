@@ -383,13 +383,13 @@ app.post('/advcredits', (req, res) => {
   }
 });
 //Dummy account credentials
-const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
-const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
+// const apiKey = 'a4db0f87-a8db-48ed-b91f-af2cf1369c9f';
+// const accountId = '04259ab9861e/814cd672-bd23-4aff-96dd-87caed118df2';
 
 
 // Orginal account credentials
-// const apiKey  = 'e713633b-ab11-485c-8153-5654c5a0ccd3';
-// const accountId = '69b202aee524/c95b76ad-9d0e-4e0f-9ba0-c8b7c640f3a8';
+const apiKey  = 'e713633b-ab11-485c-8153-5654c5a0ccd3';
+const accountId = '69b202aee524/c95b76ad-9d0e-4e0f-9ba0-c8b7c640f3a8';
 
 
 // POST endpoint to handle /challans
