@@ -7,27 +7,38 @@
 } */
 
 .user-box {
-    display: flex; /* Arrange user info and photo side-by-side */
-    align-items: center; /* Vertically center content */
-    border: 1px solid rgb(194, 188, 191);
-    border-radius: 20px;
-    padding: 1rem; /* Adjust padding as needed */
-    cursor: pointer;
-    margin: 1rem; /* Adjust margin as needed */
-  }
-  
-  .user-image {
-    flex: 0 0 150px; /* Set width and prevent image from shrinking */
-    margin-right: 1rem; /* Add margin between image and info */
-  }
-  
-  .user-image img {
-    width: 100%; /* Stretch image to fill container width */
-    border-radius: 50%; /* Make image circular */
-  }
-  
-  .user-info {
-    flex: 1; /* Allow info section to fill remaining space */
-    color: black;
-  }
-  
+  display: flex; /* Arrange user info and photo side-by-side */
+  align-items: center; /* Vertically center content */
+  border: 1px solid rgb(194, 188, 191);
+  border-radius: 20px;
+  padding: 1rem; /* Adjust padding as needed */
+  cursor: pointer;
+  margin: 1rem; /* Adjust margin as needed */
+  transition: all 0.3s ease; /* Smooth transition on hover */
+  background-color: white;
+}
+
+.user-box:hover {
+  background-color: rgba(0, 0, 0, 0.05); /* Light background color on hover */
+}
+
+.user-image {
+  flex: 0 0 150px; /* Set width and prevent image from shrinking */
+  margin-right: 1rem; /* Add margin between image and info */
+  overflow: hidden; /* Hide overflow to prevent image from breaking out of container */
+  border-radius: 50%; /* Make image circular */
+}
+
+.user-image img {
+  width: 100%; /* Stretch image to fill container width */
+  transition: transform 0.3s ease; /* Smooth transition on hover */
+}
+
+.user-box:hover .user-image img {
+  transform: scale(1.1); /* Scale up image on hover */
+}
+
+.user-info {
+  flex: 1; /* Allow info section to fill remaining space */
+  color: black;
+}

@@ -6,6 +6,8 @@ import { Route,Routes } from 'react-router-dom'
 // import ListProduct from '../../Components/ListProduct/ListProduct'
 import Users from '../Components/Users/Users'
 import UserInfo from '../Components/Userbox/Userinfo'
+import LoginSignup from './Login'
+
 
 const Admin=()=>{
     return (
@@ -15,6 +17,7 @@ const Admin=()=>{
                 <Routes>
                     <Route path="/users" element={<Users />} />
                     <Route path='/user/:userId' element={<UserInfo/>}/>
+                    <Route path='/login' element={<LoginSignup/>}/>
                 </Routes>
             </div>
         </div>

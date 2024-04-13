@@ -58,12 +58,13 @@ const UserInfo = () => {
             <p><strong>Email:</strong> {user.email}</p>
             <p><strong>Company name:</strong> {user.companyname}</p>
             <p><strong>Phone No:</strong> {user.number}</p>
-            <p>
+            <p >
                 <strong>Credits:</strong> {user.credits} 
                 <button className='plusbutton' onClick={handleAddCredits}>+</button>
             </p>
             {showCreditInput && (
-                <div>
+            
+                <div className='addingcredits'>
                 <input type="number" value={newCredits} onChange={handleCreditInputChange} />
                 <button onClick={handleCreditSubmit}>Update Credits</button>
                 </div>

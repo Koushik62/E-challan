@@ -60,4 +60,3 @@ const UserBox = ({ user }) => {
 };
 
 export default UserBox;
-

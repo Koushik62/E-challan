@@ -1,13 +1,28 @@
-import React from "react";
+
 import './Navbar.css'
-import navlogo from '../../assets/logo3.png'
-// import navProfile from '../../assets/nav-profile.svg'
-const Navbar=()=>{
+import logo from '../../assets/logo3.png'
+import { Link} from 'react-router-dom'
+
+const Navbar =()=>{
+
+    
     return (
-        <div className="navbar">
-            <p>Admin Panel</p>
-            {/* <img src={navlogo} alt="" className="nav-logo"/> */}
-            {/* <img src={navProfile} alt="" className="nav-profile"/> */}
+        <div className='navbar'>
+            <div className='navbar-logo'>
+                <img className='logo' src={logo} alt=''/>
+                <p>Vahanfin</p>
+                <img className="nav-dropdown"  alt=""/>
+           
+            </div>
+            
+            <div className='nav-login'>
+           
+                    {localStorage.getItem('auth-token')
+                    ?<button onClick={()=>{localStorage.removeItem('auth-token');window.location.replace('/')}}>Logout</button>
+                    : <Link to = '/login'><button>Login</button></Link>
+                    }
+            </div>
+
         </div>
     )
 }

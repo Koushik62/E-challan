@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import './CSS/login.css'
+import bcrypt from 'bcryptjs';
 
 const LoginSignup
 =() =>{
@@ -17,46 +18,52 @@ const LoginSignup
         setFormData({...formData,[e.target.name]:e.target.value})
     }
 
-    const login = async()=>{
-        console.log("Login Function Executed",formData);
+    const login = async () => {
+        console.log("Login Function Executed", formData);
         let responseData;
-        await fetch('http://localhost:4000/login',{
-            method:'POST',
-            headers:{
-                Accept:'application/form-data',
-                'Content-Type':'application/json'
+        await fetch('http://localhost:4000/login', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/form-data',
+                'Content-Type': 'application/json',
             },
-            body:JSON.stringify(formData),
-        }).then((response)=>response.json()).then((data)=>responseData= data)
-
-        if(responseData.success){
-            localStorage.setItem('auth-token',responseData.token);
-            window.location.replace("/");
-        }
-        else{
+            body: JSON.stringify(formData),
+        })
+            .then((response) => response.json())
+            .then((data) => (responseData = data));
+    
+        if (responseData.success) {
+            localStorage.setItem('auth-token', responseData.token);
+            window.location.replace('/');
+        } else {
             alert(responseData.errors);
         }
-    }
-    const signup = async()=>{
-        console.log("Signup Function Executed",formData);
+    };
+    
+    const signup = async () => {
+        console.log("Signup Function Executed", formData);
+        const hashedPassword = await bcrypt.hash(formData.password, 10); // Hash the password
+    
         let responseData;
-        await fetch('http://localhost:4000/signup',{
-            method:'POST',
-            headers:{
-                Accept:'application/form-data',
-                'Content-Type':'application/json'
+        await fetch('http://localhost:4000/signup', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/form-data',
+                'Content-Type': 'application/json',
             },
-            body:JSON.stringify(formData),
-        }).then((response)=>response.json()).then((data)=>responseData= data)
-
-        if(responseData.success){
-            localStorage.setItem('auth-token',responseData.token);
-            window.location.replace("/");
-        }
-        else{
+            body: JSON.stringify({ ...formData, password: hashedPassword }), // Send the hashed password
+        })
+            .then((response) => response.json())
+            .then((data) => (responseData = data));
+    
+        if (responseData.success) {
+            localStorage.setItem('auth-token', responseData.token);
+            window.location.replace('/');
+        } else {
             alert(responseData.errors);
         }
-    }
+    };
+    
     return(
 
         <div className='loginsignup'>

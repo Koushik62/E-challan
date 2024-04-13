@@ -1,15 +1,17 @@
 .userinfo{
     display: flex;
-    
+    font-family: 'Times New Roman', Times, serif;
 }
 
 .userdetails{
-    padding: 5rem;
+    padding: 5rem;  
+    background-color: white;
 }
 
 .plusbutton{
     width: 30px;
     height: auto;
+    cursor: pointer;
    
 }
 .photo{
@@ -22,3 +24,26 @@
    
 
 }
+
+.addingcredits{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+   
+}
+
+.addingcredits input{
+    height: 1.5rem;
+    background-color: rgb(232, 240, 254);
+    border-radius: 5px;
+}
+.addingcredits button{
+    background-color:#190bde;
+    cursor: pointer;
+    height: 1.8rem;
+    color: white;
+    border-radius: 5px;
+}
+.addingcredits button:hover {
+    background-color: #4049ea; /* Darker blue on button hover */
+  }

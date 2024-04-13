@@ -49,7 +49,6 @@ const Rcbasic =()=>{
             "group_id": "4ef2309c-890a-4579-9353-e003a68be194",
           data: {
             rc_number: rcNumber,
-            chassis_number: chassis
           }
         })
         .then(response => {
@@ -124,14 +123,7 @@ const Rcbasic =()=>{
                       />
                     </div>
 
-                  <div className="rcdetails">
-                    <input
-                      placeholder="Enter Chassis Number"
-                      type="text"
-                      value={chassis}
-                      onChange={e => setChassisNumber(e.target.value)}
-                    />
-                  </div>
+                
 
               <div className="viewbutton">
                 <button onClick={handleViewChallan}>View Details</button>
@@ -159,52 +151,101 @@ const Rcbasic =()=>{
                                       </div>
                                      
                                       <div className="rctable">
-                                          <div  className="rctable-left"><p>Action</p></div>
-                                            
-                                          <div className="rctable-right"><p>{item.action}</p></div>
+                                          <div  className="rctable-left"><p>Owner name</p></div>
+                                           
+                                          <div className="rctable-right"><p>{item.result.extraction_output.owner_name}</p></div>
                                             
                                         
                                       </div>
                                       
                                       <div className="rctable">
-                                          <div className="rctable-left"><p>Completed At</p></div>
-                                            
-                                          <div className="rctable-right"><p>{item.completed_at}</p></div>
-                                            
-                                        
-                                      </div>
-                                      <div className="rcline"></div>
-                                      <div className="rctable">
-                                          <div className="rctable-left"><p>Created At</p></div>
-                                            
-                                          <div className="rctable-right"><p>{item.created_at}</p></div>
+                                          <div className="rctable-left"><p>RTO Name</p></div>
+
+                                          <div className="rctable-right"><p>{item.result.extraction_output.rto_name !== null ? item.result.extraction_output.rto_name : 'N/A'}</p></div>
                                             
                                         
                                       </div>
                                       <div className="rcline"></div>
                                       <div className="rctable">
-                                          <div className="rctable-left"><p>Error</p></div>
+                                          <div className="rctable-left"><p>Vehicle Class</p></div>
                                             
-                                          <div className="rctable-right"><p>{item.error}</p></div>
-                                            
-                                        
-                                      </div>
-                                      <div className="rcline"></div>
-                                      <div className="rctable">
-                                          <div className="rctable-left"><p>task_id</p></div>
-                                            
-                                          <div className="rctable-right"><p>{item.task_id}</p></div>
+                                          <div className="rctable-right"><p>{item.result.extraction_output.vehicle_class}</p></div>
                                             
                                         
                                       </div>
                                       <div className="rcline"></div>
                                       <div className="rctable">
-                                          <div className="rctable-left"><p>type</p></div>
+                                          <div className="rctable-left"><p>Avg. Gross Vehicle Weight</p></div>
                                             
-                                          <div className="rctable-right"><p>{item.type}</p></div>
+                                          <div className="rctable-right"><p>{item.result.extraction_output.avg_gross_vehicle_weight}</p></div>
                                             
                                         
                                       </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Result</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.status}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Chasis Number</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.chassis_number}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Color</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.color !== null? item.result.extraction_output.color : 'N/A' }</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Fuel type</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.fuel_type}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Insurance Validity</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.insurance_validity}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Maker Model</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.maker_model}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Manufacturer</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.manufacturer !== null ? item.result.extraction_output.manufacturer : 'N/A'}</p></div>
+                                            
+                                        
+                                      </div>
+                                      <div className="rcline"></div>
+                                      <div className="rctable">
+                                          <div className="rctable-left"><p>Registration Date</p></div>
+                                            
+                                          <div className="rctable-right"><p>{item.result.extraction_output.registration_date}</p></div>
+                                            
+                                        
+                                      </div>
+
                                        
                                         
                                     

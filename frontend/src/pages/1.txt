@@ -1,0 +1,395 @@
+[
+    {
+        "action": "verify_with_source",
+        "completed_at": "2024-04-13T17:12:45+05:30",
+        "created_at": "2024-04-13T17:12:45+05:30",
+        "group_id": "0bf8c9fe-dc96-4ac4-9f5a-8133ef3eee80",
+        "request_id": "ee9baa7a-96cd-425d-98d2-90ad7d0f0acc",
+        "result": {
+            "source_output": {
+                "challan_details": [
+                    {
+                        "accused_father_name": "",
+                        "accused_name": "SHAFIQUE AHMAD",
+                        "amount": 150,
+                        "challan_number": "JH65769230301164849",
+                        "challan_place": "",
+                        "challan_status": "pending",
+                        "court_challan": null,
+                        "court_status": "",
+                        "date_of_challan": "2023-03-01",
+                        "image_url": "https://echallan.parivahan.gov.in/mparivahan-api/print-page?challan_no=Oc8d6KEYhflzMPEokhFPky1O%2FC%2BAKKPGPKfiJv5rzlg%3D",
+                        "number": 1,
+                        "payment_url": "https://echallan.parivahan.gov.in/index/accused-challan",
+                        "rto": "Ranchi",
+                        "state": "JH",
+                        "timestamp_of_challan": "16:48:49"
+                    }
+                ],
+                "challan_summary": {
+                    "total_challan_number": 1,
+                    "total_paid_challan": 0,
+                    "total_pending_challan": 1
+                },
+                "last_5_digit_chassis": "37863",
+                "rc_number": "JH05N9005",
+                "status": "id_found"
+            }
+        },
+        "status": "completed",
+        "task_id": "cc020e68-d2c3-4f75-8f93-5b27644bf0cd",
+        "type": "ind_rc_challan"
+    }
+]
+
+Field
+Value
+Challan Details
+:
+[ { "accused_father_name": "", "accused_name": "SHAFIQUE AHMAD", "amount": 150, "challan_number": "JH65769230301164849", "challan_place": "", "challan_status": "pending", "court_challan": null, "court_status": "", "date_of_challan": "2023-03-01", "image_url": "https://echallan.parivahan.gov.in/mparivahan-api/print-page?challan_no=Oc8d6KEYhflzMPEokhFPky1O%2FC%2BAKKPGPKfiJv5rzlg%3D", "number": 1, "payment_url": "https://echallan.parivahan.gov.in/index/accused-challan", "rto": "Ranchi", "state": "JH", "timestamp_of_challan": "16:48:49" } ]
+Challan Summary
+:
+{ "total_challan_number": 1, "total_paid_challan": 0, "total_pending_challan": 1 }
+Last 5 Digits Of Chasis Number
+:
+37863
+RC Number
+:
+JH05N9005
+Status
+:
+id_found
+
+
+
+
+## basic
+[
+    {
+        "action": "verify_with_source",
+        "completed_at": "2024-04-13T17:14:19+05:30",
+        "created_at": "2024-04-13T17:14:19+05:30",
+        "group_id": "a7c3beee-6fba-4b77-b249-6d58b652f2ea",
+        "request_id": "9da0a1dd-add4-4cb7-8aa5-2545a2094821",
+        "result": {
+            "extraction_output": {
+                "avg_gross_vehicle_weight": "1540",
+                "axle_configuration": null,
+                "chassis_number": "MAKGD852A6N3XXXXX",
+                "color": null,
+                "emission_norms": "BHARAT STAGE II",
+                "engine_number": null,
+                "fitness_upto": "2026-04-04",
+                "fuel_type": "PETROL",
+                "insurance_details": null,
+                "insurance_validity": "2023-08-17",
+                "maker_model": "HONDA CAR",
+                "manufacturer": "",
+                "mv_tax_upto": null,
+                "owner_name": "SHAFIQUE AHMAD",
+                "owner_number": null,
+                "permit_issue_date": null,
+                "permit_number": null,
+                "permit_type": null,
+                "permit_validity": null,
+                "puc_number_upto": "2023-03-24",
+                "registration_date": "2006-04-05",
+                "registration_number": "JH05N9005",
+                "rto_name": null,
+                "status": "id_found",
+                "unladen_weight": "1055",
+                "vehicle_class": "LMV",
+                "vehicle_financier": null
+            }
+        },
+        "status": "completed",
+        "task_id": "476ca3af-f050-4746-b68d-bba36a54cc4c",
+        "type": "ind_rc_basic"
+    }
+]
+Field
+Value
+Owner Name
+:
+SHAFIQUE AHMAD
+RTO Name
+:
+N/A
+Vehicle Class
+:
+LMV
+Avg. Gross Vehicle Weight
+:
+1540
+Result
+:
+id_found
+Chasis Number
+:
+MAKGD852A6N3XXXXX
+Color
+:
+N/A
+Fuel type
+:
+PETROL
+Insurance Validity
+:
+2023-08-17
+Maker Model
+:
+HONDA CAR
+Manufacturer
+:
+N/A
+Registration Date
+:
+2006-04-05
+
+
+
+
+## adv
+
+
+[
+    {
+        "action": "verify_with_source",
+        "completed_at": "2024-04-13T17:41:20+05:30",
+        "created_at": "2024-04-13T17:41:19+05:30",
+        "group_id": "f3c97396-706c-445f-b749-333ec5eddb8a",
+        "request_id": "7f0c1a97-1428-4867-a254-c3c3e9e7d486",
+        "result": {
+            "extraction_output": {
+                "noc_valid_upto": null,
+                "seating_capacity": "5",
+                "fitness_upto": "2026-04-04",
+                "variant": null,
+                "registration_number": "JH05N9005",
+                "npermit_upto": null,
+                "manufacturer_model": "HONDA CAR",
+                "standing_capacity": "0",
+                "status": "id_found",
+                "is_financed": false,
+                "status_message": null,
+                "number_of_cylinder": "4",
+                "colour": "N.H.BLACK",
+                "puc_valid_upto": "2023-03-24",
+                "vehicle_class": "LMV",
+                "permanent_address": "AT-H NO-23A ROAD NO-5 SANKOSAI, DIMNA JSR Purbi Singhbhum Jharkhand 831012",
+                "permit_no": "",
+                "father_name": "SHEKH BARKATULLAH",
+                "status_verfy_date": "2024-04-13",
+                "m_y_manufacturing": "2006-01",
+                "registration_date": "2006-04-05",
+                "gross_vehicle_weight": "1540",
+                "registered_place": "EAST SINGHBHUM (JAMSHEDPUR), Jharkhand",
+                "permit_validity_upto": null,
+                "insurance_policy_no": "",
+                "noc_details": null,
+                "npermit_issued_by": "1800-01-01",
+                "sleeper_capacity": "0",
+                "current_address": "AT-H NO-23A ROAD NO-5 SANKOSAI, DIMNA JSR Purbi Singhbhum Jharkhand 831012",
+                "status_verification": "ACTIVE",
+                "permit_type": null,
+                "noc_status": null,
+                "masked_name": false,
+                "fuel_type": "PETROL",
+                "permit_validity_from": null,
+                "owner_name": "SHAFIQUE AHMAD",
+                "puc_number": "",
+                "owner_mobile_no": "",
+                "blacklist_status": null,
+                "manufacturer": "HONDA CARS INDIA LTD",
+                "permit_issue_date": null,
+                "engine_number": "L15A30068523",
+                "chassis_number": "MAKGD852A6N337863",
+                "mv_tax_upto": "2026-01-14",
+                "body_type": "SALOON",
+                "unladden_weight": "1055",
+                "insurance_name": "",
+                "owner_serial_number": "2",
+                "vehicle_category": "LMV",
+                "noc_issue_date": null,
+                "npermit_no": "",
+                "cubic_capacity": "1497",
+                "norms_type": "BHARAT STAGE II",
+                "state": "Jharkhand",
+                "insurance_validity": "2022-02-20",
+                "financer": "",
+                "wheelbase": "999999"
+            }
+        },
+        "status": "completed",
+        "task_id": "6500f8e5-2bfe-41a2-80ad-8e7a63c16602",
+        "type": "ind_rc_plus"
+    }
+]
+
+
+Owner Name
+
+Chasis Number:
+
+Vehicle's Class:
+
+Colour:
+:
+N.H.BLACK
+NOC Details:
+
+Norms Type
+
+Manufacturer Model
+
+Black list Status:
+
+
+
+Masked Name:
+:
+false
+Maker Model:
+:
+N/A
+Insurance Validity:
+:
+2022-02-20
+Permit Validity Upto:
+:
+N/A
+PUC Number:
+:
+N/A
+Financer:
+:
+N/A
+Fitness Upto:
+:
+2026-04-04
+Current Address:
+:
+AT-H NO-23A ROAD NO-5 SANKOSAI, DIMNA JSR Purbi Singhbhum Jharkhand 831012
+Permit Issue Date:
+:
+N/A
+Seating Capacity:
+:
+5
+Body Type:
+:
+SALOON
+Manufacturing Year:
+:
+2006-01
+N Permit Upto:
+:
+N/A
+Permanent Address:
+:
+AT-H NO-23A ROAD NO-5 SANKOSAI, DIMNA JSR Purbi Singhbhum Jharkhand 831012
+Father's Name:
+:
+SHEKH BARKATULLAH
+Permit Type:
+:
+N/A
+Cubic Capacity
+:
+1497
+Insurance Policy Number
+:
+N/A
+Status Message:
+:
+N/A
+Manufacturer
+:
+HONDA CARS INDIA LTD
+Wheelbase:
+:
+999999
+Status:
+:
+id_found
+N Permit Issued By:
+:
+1800-01-01
+NOC Status:
+:
+N/A
+Variant:
+:
+N/A
+MV Tax upto:
+:
+2026-01-14
+Permit Validity From:
+:
+N/A
+State:
+:
+Jharkhand
+Registration Number:
+:
+JH05N9005
+Engine Number:
+:
+L15A30068523
+Owner's Mobile No.:
+:
+N/A
+N Permit Number:
+:
+N/A
+Date of Registration:
+:
+2006-04-05
+NOC Valid Upto:
+:
+N/A
+NOC Issue Date:
+:
+N/A
+Number of Cylinder:
+:
+4
+Fuel Type:
+:
+PETROL
+Status Verification:
+:
+ACTIVE
+PUC Valid Upto:
+:
+2023-03-24
+Unladden Weight:
+:
+1055
+Registered Place
+:
+EAST SINGHBHUM (JAMSHEDPUR), Jharkhand
+Owner Serial Number
+:
+2
+Standing Capacity:
+:
+0
+Status Verify Date:
+:
+2024-04-13
+Permit Number:
+:
+N/A
+Insurance Name:
+:
+N/A
+Vehicle Category:
+:
+LMV
+Sleeper Capacity:
+:
+0
+Gross Vehicle Weight:
+:
+1540
