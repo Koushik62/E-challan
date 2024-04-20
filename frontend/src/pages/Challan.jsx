@@ -2,7 +2,7 @@ import React,{useState,useEffect,Link} from "react";
 import axios from 'axios';
 import './CSS/Rcbasic.css'
 
-const Rcbasic =()=>{
+const Challan =()=>{
 
  
 
@@ -237,4 +237,4 @@ const Rcbasic =()=>{
     )
 }
 
-export default Rcbasic
+export default Challan
