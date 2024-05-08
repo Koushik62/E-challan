@@ -7,6 +7,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const bcrypt = require('bcrypt');
 const cors = require("cors");
+
 import('node-fetch').then(({ default: fetch }) => {
     // Use fetch here
 }).catch(err => {
@@ -578,8 +579,35 @@ app.post('/challans', (req, res) => {
   });
 });
   
-  
 
+
+app.post('/details', (req, res) => {
+
+    const requestData = req.body;
+
+    const options = {
+      method: 'POST',
+      url: 'https://rto-vehicle-information-india.p.rapidapi.com/getVehicleInfo',
+      headers: {
+        'content-type': 'application/json',
+        'X-RapidAPI-Key': '742c463415msh55159cb981c077ep151d70jsnccb39958e318',
+        'X-RapidAPI-Host': 'rto-vehicle-information-india.p.rapidapi.com'
+      },
+      body: JSON.stringify(requestData)
+    };
+
+    request(options, (error, response, body) => {
+      if (error) {
+        console.error('Error:', error);
+        return;
+      }
+  
+      res.status(200).json(body);
+      console.log(body);
+      // Send task details to frontend or process it further as needed
+    });
+  
+})
 
 
 

@@ -29,8 +29,22 @@
   margin: 0;
   color: #fff; /* White text for better contrast */
 }
+.Initialpara{
+  display: flex ;
+}
+.Intialpara-left{
+  width: 50%;
+  padding: 5rem;
+}
 
-
+.Intialpara-right{
+  width: 50%;
+  padding: 2rem;
+}
+.Intialpara-right img{
+  width: 30rem;
+  height: 25rem;
+}
 .photo-left {
   display: flex;
   flex:1;

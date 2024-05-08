@@ -90,7 +90,7 @@ const Challan =()=>{
 
     return (
         <div className="rchome">
-        
+            
             <div class="container">
               <div class="row justify-content-end">
                 <div class="col-md-3">
@@ -179,7 +179,7 @@ const Challan =()=>{
                                           <div  className="rctable-left"><p>Image url</p></div>
                                             
                                           <div className="rctable-right"><p><a href="{item.result.source_output.challan_details[0].image_url}" target="_blank">Click here</a>
-</p></div>
+                                          </p></div>
                                         
                                       </div>
                                       <div className="rcline"></div>
@@ -204,7 +204,7 @@ const Challan =()=>{
                                           <div  className="rctable-left"><p>Patment Url</p></div>
                                             
                                           <div className="rctable-right"><p>{<a href="{item.result.source_output.challan_details[0].payment_url}" target="_blank">Click here</a>
-}</p></div>
+                                           }</p></div>
                                             
                                         
                                       </div>
@@ -238,3 +238,6 @@ const Challan =()=>{
 }
 
 export default Challan
+
+
+

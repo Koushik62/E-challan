@@ -1,7 +1,7 @@
 import React,{useState,useEffect} from "react";
 import axios from 'axios';
 import './CSS/Rcbasic.css'
-
+import Sidelogo from '../Components/Assets/sidelogi.jpg'
 const Rcbasic =()=>{
 
  
@@ -11,10 +11,25 @@ const Rcbasic =()=>{
     const [showResponse, setShowResponse] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
     const [chassis, setChassisNumber] = useState('');
+    const places = ['HR26 Gurgaon North', 'DL01 Delhi North Mall Road', 'TS010 Hyderabad North', 'AP02 Vizianagaram', 'KA01 Bangalore'];
+    const [currentPlaceIndex, setCurrentPlaceIndex] = useState(0);
+    const [isBlinking, setIsBlinking] = useState(false);
+    useEffect(() => {
+      const intervalId = setInterval(() => {
+        setIsBlinking(true);
+        setTimeout(() => {
+          setIsBlinking(false);
+          setCurrentPlaceIndex((prevIndex) => (prevIndex + 1) % places.length);
+        }, 1000);
+      }, 2000);
+  
+      return () => clearInterval(intervalId);
+    }, [places.length]);
 
 
     useEffect(() => {
-      // Fetch user's credits when the component mounts
+      // Fetch user's credis when the component mounts
+      
       fetchUserCredits();
     }, []);
   
@@ -89,7 +104,16 @@ const Rcbasic =()=>{
 
     return (
         <div className="rchome">
-        
+          <div className="Initialpara">
+              <div className="Intialpara-left"> 
+                <h1>Real time Vehicle RC using<br/> Government Database <br/> Check</h1>
+                <h2>{isBlinking ? '' : places[currentPlaceIndex]}</h2>
+              </div>
+              <div className="Intialpara-right">
+                <img src={Sidelogo} alt="" />
+              </div>
+                
+            </div>
             <div class="container">
               <div class="row justify-content-end">
                 <div class="col-md-3">
