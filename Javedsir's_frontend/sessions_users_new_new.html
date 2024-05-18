@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta content="alQSBkQRFnQgKTQwQ191ND40OQcePm9x80dnsuT5xZQJn64SvmXnMY9I" name="csrf-token">
+<title data-suffix=" · SelfServe">IDfy · SelfServe</title>
+      <script defer phx-track-static type="text/javascript" src="/assets/app.js"></script>
+      <link rel="icon" type="image/png" href="/images/idfylogo.svg">
+
+      <link phx-track-static rel="stylesheet" href="/css/reset.css">
+      <link phx-track-static rel="stylesheet" href="/css/base.css">
+      <link phx-track-static rel="stylesheet" href="/css/main.css">
+      <link phx-track-static rel="stylesheet" href="/css/signup-signin.css">
+      <link phx-track-static rel="stylesheet" href="/css/form.css">
+      <link phx-track-static rel="stylesheet" href="/css/button.css">
+      <link phx-track-static rel="stylesheet" href="/css/alert.css">
+      <link phx-track-static rel="stylesheet" href="/css/forgot-password.css">
+      <link phx-track-static rel="stylesheet" href="/css/common-signup-forgot.css">
+      <link phx-track-static rel="stylesheet" href="/css/overide.css">
+      <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div class="column-wrapper">
+    <div class="d-flex signup_signin forgot_password">
+      <div class="left">
+
+        <!-- Left column -->
+        <div class="left-col">
+
+          <div class="left-content">
+            <div>
+              <img src="/images/logo_with_text.svg" alt="">
+            </div>
+
+            <h2 class="title">140+ APIs with 100% uptime</h2>
+
+            <div class="leftEleWrapper">
+              <img src="/images/rocket.svg" alt="rocket image">
+              <div class="">
+                <p>Get full access to all IDfy APIs with industry
+                  leading TAT and accuracy.</p>
+                <p>No credit card required for trial.</p>
+              </div>
+            </div>
+          </div>    <!-- End of left-content -->
+
+
+          <div class="placeholder-wrapper">
+          <img src="/images/left-col-ph.png" alt="" class="ph-img">
+         </div>
+        </div>   <!-- End of left-col -->
+
+      </div>
+
+      <div class="right">
+        <!-- Right column -->
+        <div class="right-col">
+          <div class="form-modal">
+<main>
+
+
+<div id="signup_form" class="form">
+<form action="/sessions/users/new" method="post">
+  
+  
+    <input name="_csrf_token" type="hidden" value="alQSBkQRFnQgKTQwQ191ND40OQcePm9x80dnsuT5xZQJn64SvmXnMY9I">
+  
+  
+  <h2 class="title">Create Account</h2>
+  <h4>It is simple and easy.</h4>
+
+  <div class="form-top">
+    <div class="input-group">
+<label class="lbl" for="user_name">Name</label>
+<input autocomplete="off" class="input" id="user_name" name="user[name]" type="text">
+
+    </div>
+
+    <div class="input-group-container">
+      <div class="input-group">
+        <label class="lbl" for="user_company_name">Company Name</label>
+<input autocomplete="off" class="input" id="user_company_name" name="user[company_name]" type="text">
+
+      </div>
+
+      <div class="input-group">
+        <label class="lbl" for="user_mobile_no">Mobile Number</label>
+        <div class="control-with-icon left-icon">
+          <img src="/images/india-flag.svg" alt="icon" class="input-icon">
+          <span class="textph"> +91 </span>
+<input autocomplete="off" class="input" id="user_mobile_no" name="user[mobile_no]" type="number">
+        </div>
+
+      </div>
+    </div>
+
+    <div class="input-group">
+      <label class="lbl" for="user_company_email">Work Email</label>
+<input autocomplete="off" class="input" id="user_company_email" name="user[company_email]" type="text">
+
+    </div>
+    <div>
+<input id="user_ip_address" name="user[ip_address]" type="hidden">
+    </div>
+
+    <div class="input-group with-icon closed" id="toggleIcon">
+      <div class="justify-space-between">
+        <label class="lbl" for="user_password">Set Password</label>
+      </div>
+
+      <div class="password_with_icon relative">
+<input class="input" id="form_signup_password" name="user[password]" type="password">
+        <span class="icon">
+          <span id="showEye"></span>
+        </span>
+      </div>
+
+
+        <div class="info" id="passwordSugg">
+          Use 8 or more characters with a mix of upper case, lower case, numbers & symbols.
+        </div>
+
+    </div>
+  </div>
+
+  <p class="tnc">
+    By signing up you agree to our
+    <a class="blue-link" href="https://www.idfy.com/terms-of-use/" target="_blank">terms of use</a>
+    and
+    <a class="blue-link" href="https://www.idfy.com/privacy-policy/" target="_blank">privacy policy</a>.
+  </p>
+
+  <div class="form-bottom">
+<button class="btn btn-primary btn-md rounded w-100" id="signup_submit" phx-disable-with="Saving..." type="submit">Sign Up</button>
+    <hr class="hr-text" data-content="Already have an account?">
+<a class="btn btn-outline-primary btn-md w-100" href="/sessions/new">Sign In</a>
+  </div>
+
+</form>
+<h6 class="terms_n_conditions">
+    <a href="https://www.idfy.com/terms-of-use/" target="_blank">Terms of use</a>
+    <a href="https://www.idfy.com/privacy-policy/" target="_blank">Privacy policy</a>
+  </h6>
+
+<script defer phx-track-static type="text/javascript" src="/assets/form.js"></script>
+</div>
+</main>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script defer phx-track-static type="text/javascript" src="/assets/signup_signin.js"></script>
+</html>

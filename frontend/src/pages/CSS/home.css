@@ -193,11 +193,12 @@
   border-radius: 5px;
   margin-right: 5px;
   cursor: pointer;
-  background-color: #190BDE; /* Default background color */
+  background-color:white; /* Default background color */
 }
 
 .tab.active {
-  background-color: white /* Selected background color */
+  background-color: #E4E3F9/* Selected background color */
+ 
 }
 
 .tab span {
@@ -225,6 +226,7 @@
   overflow-y: auto; 
   max-height: 300px;
   padding: 30px;
+  
   
   
 }
@@ -276,7 +278,7 @@
 
 .rcctable p{
   font-size: 13px;
-  
+  font-weight: 100;
 }
 /* .table {
   display: flex;

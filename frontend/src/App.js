@@ -10,7 +10,7 @@ import AdvRcinfo from './pages/Rcadv.jsx'
 import LoginSignup from './pages/login.jsx';
 import AddCredits from './pages/AddCredits.jsx'
 import Home from './pages/home.jsx'
-
+import Design from './pages/designpage.jsx'
 import Challan from './pages/Challan.jsx';
 function App() {
   return (
@@ -26,6 +26,7 @@ function App() {
         <Route path='/challan' element={<Challan/>}/>
         <Route path='/addcredits' element={<AddCredits/>} />
       </Routes>
+      <Design/>
       <Footer/>
     </BrowserRouter> 
       

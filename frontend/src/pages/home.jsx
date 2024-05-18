@@ -10,12 +10,12 @@ const Rcbasic =()=>{
     const [rcNumber, setRcNumber] = useState('');
     const [showResponse, setShowResponse] = useState(false);
     const [responseMessage, setResponseMessage] = useState('');
-    const [chassis, setChassisNumber] = useState('');
+   
     const places = ['HR26 Gurgaon North', 'DL01 Delhi North Mall Road', 'TS010 Hyderabad North', 'AP02 Vizianagaram', 'KA01 Bangalore'];
     const [currentPlaceIndex, setCurrentPlaceIndex] = useState(0);
     const [isBlinking, setIsBlinking] = useState(false);
     const [selectedOption, setSelectedOption] = useState('Dictionary');
-    const [JSONdata, setJSONdata] = useState('');  
+  
     const handleClick = (option) => {
         setSelectedOption(option);
     };
@@ -193,7 +193,7 @@ const Rcbasic =()=>{
                                     
                                 
                             ) : (
-                                
+
                                 <div>
                                     <div className="rctable">
                                         <div className="rctable-left"><p>Owner name</p></div>

@@ -1,0 +1,296 @@
+.Designpage{
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.sqaures{
+    display: flex;
+    gap:30px;
+    padding: 0 2rem;
+}
+.components{
+    background-color: #F3F2FB;
+    padding: 20px;
+    width: 33%;
+}
+.components ul li {
+    list-style-type: none; /* Remove default bullets */
+    position: relative; /* Enable relative positioning for the tick mark */
+    padding-left: 15px; /* Adjust padding for better alignment */
+    margin-bottom: 10px; /* Add some margin for spacing */
+  }
+  
+  .components ul li::before {
+    content: "✓"; /* Content for the tick mark */
+    font-size: 12px; /* Adjust font size as needed */
+    color: green; /* Color for the tick mark */
+    position: absolute; /* Make the tick mark absolute */
+    top: 5px; /* Adjust vertical position of the tick mark */
+    left: -10px; /* Adjust horizontal position of the tick mark */
+  }
+  
+
+.components p{
+    font-weight: 100;
+    color: grey;
+}
+
+
+.professional{
+    display:flex;
+    padding: 2rem;
+    background-color: #FAF9FF;
+}
+.professional-left{
+    width: 50%;
+    padding: 1rem;
+}
+.professional-right{
+    width: 50%;
+    padding: 1rem;
+    padding-top: 0px;
+}
+.professional-right h1{
+    font-size: 3rem;
+}
+.professional-right p{
+    font-size: 17px;
+}
+.professional-right button{
+    height: 2rem;
+    
+    border: none;
+    border-radius: 5px;
+    background-color: #190bde; /* Blue button color */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-family:'Times New Roman', Times, serif;
+    
+     width: 10rem;
+}
+.professional-right button:hover{
+    background-color: #4049ea; /* Darker blue on button hover */
+}
+
+.Reduce{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color:#FAF9FF ;
+}
+.Reduce h1{
+    font-size: 2.4rem;
+}
+
+.Reduce h3{
+    font-size: 16px;
+   font-weight: 100;
+}
+.Reduce button{
+    height: 2rem;
+    
+    border: none;
+    border-radius: 5px;
+    background-color: #190bde; /* Blue button color */
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-family:'Times New Roman', Times, serif;
+    
+     width: 10rem;
+}
+
+.Reduce button:hover{
+    background-color: #4049ea;
+}
+
+.data {
+    display: flex; /* Make the data container a flexbox for side-by-side layout */
+    
+   height: 20rem;
+   
+    padding: 2rem;
+    gap: 30px;
+
+
+  }
+  
+  .data p{
+    color: grey;
+  }
+  .data-left,
+  .data-right {
+    flex: 1; /* Make each side of the data container flexible */
+    padding: 20px; /* Add padding for content within each side */
+    border: 1px solid #ddd; /* Add a thin border */
+    border-radius: 5px; /* Add some rounded corners */
+  }
+  
+  .data-list {
+    list-style-type: none; /* Remove default bullet points */
+    padding-left: 0; /* Remove default indentation */
+    margin: 0; /* Remove default margin */
+  }
+  
+  .data-icon {
+    font-size: 16px; /* Adjust checkmark size as needed */
+    color: green; /* Color for the checkmark */
+    margin-right: 10px; /* Add some margin between the checkmark and the text */
+  }
+
+  .data img{
+    width: 3rem;
+  }
+  
+
+.Employee{
+    display: flex;
+    padding: 2rem;  
+}
+
+.Employee p{
+    font-weight: 100;
+}
+.Employee button{
+    height: 3rem;
+    
+    border: none;
+    border-radius: 5px;
+    background-color: white; /* Blue button color */
+    color: blue;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-family:'Times New Roman', Times, serif;
+    border: solid 0.5px blue;
+     width: 10rem;
+}
+.Employee button:hover{
+    background-color: #4049ea;
+    color: white;
+}
+
+
+.Employee-left{
+    width: 50%;
+    padding-left: 20px;
+}
+.Employee-right{
+    width: 50%;
+    padding-left: 80px;
+}
+
+.Company{
+    display: flex;
+    padding: 2rem;  
+}
+.Company button{
+    height: 3rem;
+    
+    border: none;
+    border-radius: 5px;
+    background-color: white; /* Blue button color */
+    color: blue;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-family:'Times New Roman', Times, serif;
+    border: solid 0.5px blue;
+     width: 10rem;
+}
+.Company button:hover{
+    background-color: #4049ea;
+    color: white;
+}
+.Company-left{
+    width: 50%;
+   
+}
+.Company-left img{
+    height: 20rem;
+}
+.Company-right{
+    width: 50%;
+    padding-top: 0rem;
+}
+
+.Jobposting{
+    display: flex;
+    padding: 2rem;  
+}
+.Jobposting button{
+    height: 3rem;
+    
+    border: none;
+    border-radius: 5px;
+    background-color: white; /* Blue button color */
+    color: blue;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-family:'Times New Roman', Times, serif;
+    border: solid 0.5px blue;
+    
+     width: 10rem;
+}
+.Jobposting button:hover{
+    background-color: #4049ea;
+    color: white;
+}
+
+.Jobposting-left{
+    width: 50%;
+    padding-left: 20px;
+}
+.Jobposting-right{
+    width: 50%;
+    padding-left: 80px;
+}
+
+.last{
+    display: flex;
+    flex-direction: column;
+    background-color: #F3F2FB;
+    padding: 20px;
+    gap: 30px;
+    height: 28rem;
+   
+}
+.last h1{
+    padding-left:23rem;
+}
+
+.lastdata{
+    display: flex;
+    gap: 20px;
+}
+.lastdata img{
+    width: 2.4rem;
+    height: 3rem;
+}
+.lastdatacomp{
+    background-color: white;
+    padding: 30px;
+    border: solid 0.05px white;
+}
+.lastdatacomp button{
+    height: 3rem;
+    
+    border: none;
+    border-radius: 5px;
+    background-color:white;/* Blue button color */
+    color: blue;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    font-family:'Times New Roman', Times, serif;
+    border: solid 0.5px blue;
+     width: 10rem;
+}
+.lastdatacomp button:hover{
+    background-color: #190bde;
+    color: white;
+}

@@ -3,35 +3,56 @@ import './Footer.css'
 
 import instagram_icon from '../Assets/instagram_icon.png'
 
-import whatsapp_icon from '../Assets/whatsapp_icon.png'
-
+import facebook from '../Assets/facebook.png'
+import Twitter from '../Assets/Twitter.png'
+import youtube from '../Assets/youtube.png'
+import linkedin from '../Assets/LinkedIn.png'
 const Footer =() =>{
     return (
         <div className="footer">
-            <div className="footer-logo">
+            <div className="footerup">
+                <div className="aboutus">
+                    <h4>About us</h4>
+                    <ul>
+                        <li>Businesses credit</li>
+                        <li>Partners</li>
+                        <li>insights</li>
+                    </ul>
 
-                <p>Vahanfin</p>
-            </div>
-            <ul className="footer-links">
-                <li>Company</li>
-                <li>Products</li>
-                <li>Offices</li>
-                <li>About</li>
-                <li>Contact</li>
-            </ul>
-            <div className="footer-social-icon">
-                <div className="footer-icon-container">
+                </div>
+                <div className="solutions">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li>E-Challan</li>
+                        <li>RC Details</li>
+                        <li>API</li>
+                    </ul>
+
+
+                </div>
+                <div className="Getintouch">
+                    <h4>Get in touch</h4>
+                    <ul>
+                        <li>Vahanfin Solutions Pvt Ltd<br/>
+                            Nabibux House, 3rd Floor,<br/>
+                            Vakola Bridge Road, Santacruz (E),<br/>
+                            Mumbai 400 055, Maharashta,INDIA</li>
+                    </ul>
+                </div>
+                <div className="logos">
                     <img src={instagram_icon} alt=""/>
+                    <img src={facebook} alt=""/>
+                    <img src={linkedin} alt=""/>
+                    <img src={Twitter} alt=""/>
+                    <img src={youtube} alt=""/>
                 </div>
-                
-                <div className="footer-icon-container">
-                    <img src={whatsapp_icon} alt=""/>
-                </div>
+
             </div>
-            <div className="footer-copyright">
-                <hr/>
-                <p>Copyright @2024 - All Rights Reserved</p>
+            
+            <div className="footerdown">
+
             </div>
+
         </div>
     )
 }
