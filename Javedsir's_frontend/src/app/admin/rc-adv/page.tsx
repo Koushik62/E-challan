@@ -90,7 +90,7 @@
 // }
 
 // export default RCChallan
- "use client";
+"use client";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -114,7 +114,7 @@ function RCChallan() {
         e.preventDefault();
         setStatus('Loading...');  // Update status to Loading while fetching
         try {
-            const response = await fetch(`https://health.rajnikantmahato.me/crosh.php?url=http://103.211.219.91/echallan/${rcNumber}`, {
+            const response = await fetch(`http://103.211.219.91/vehiclenumber/HR55AA6786`, {
                 method: 'GET'
                 
             });
@@ -138,7 +138,7 @@ function RCChallan() {
 
     return (
         <>
-            <h1 className="text-lg font-semibold md:text-2xl">RC Challan API</h1>
+            <h1 className="text-lg font-semibold md:text-2xl">RC ADV API</h1>
             <main className="grid flex-1 gap-4 overflow-auto p-4 pt-0 md:grid-cols-2 lg:grid-cols-3">
                 <div className="relative hidden flex-col items-start gap-8 md:flex">
                     <form onSubmit={handleSubmit} className="grid w-full items-start gap-6">

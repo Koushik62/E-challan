@@ -90,7 +90,7 @@
 // }
 
 // export default RCChallan
- "use client";
+"use client";
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -114,7 +114,7 @@ function RCChallan() {
         e.preventDefault();
         setStatus('Loading...');  // Update status to Loading while fetching
         try {
-            const response = await fetch(`https://health.rajnikantmahato.me/crosh.php?url=http://103.211.219.91/echallan/${rcNumber}`, {
+            const response = await fetch(`http://103.211.219.91/vehiclenumber/HR55AA6786`, {
                 method: 'GET'
                 
             });
@@ -138,7 +138,7 @@ function RCChallan() {
 
     return (
         <>
-            <h1 className="text-lg font-semibold md:text-2xl">RC Challan API</h1>
+            <h1 className="text-lg font-semibold md:text-2xl">Pay Challan</h1>
             <main className="grid flex-1 gap-4 overflow-auto p-4 pt-0 md:grid-cols-2 lg:grid-cols-3">
                 <div className="relative hidden flex-col items-start gap-8 md:flex">
                     <form onSubmit={handleSubmit} className="grid w-full items-start gap-6">
@@ -153,8 +153,8 @@ function RCChallan() {
                                 <Input type="text" placeholder="Eg. 00364" value={chassisNumber} onChange={(e) => setChassisNumber(e.target.value)} />
                             </div>
                             <div className="flex justify-between">
-                                <Button type="submit">Run API</Button>
-                                <Button variant="outline">Sample</Button>
+                                <Button type="submit">Submit</Button>
+                                
                             </div>
                         </fieldset>
                     </form>
@@ -163,89 +163,7 @@ function RCChallan() {
                 <div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2">
                     <fieldset className="grid gap-6 rounded-lg border p-4">
                         <legend className="-ml-1 px-1 text-sm font-medium">Output</legend>
-                        <Tabs defaultValue="account">
-                            <TabsList className="grid w-full grid-cols-2">
-                                <TabsTrigger value="account">Tabular</TabsTrigger>
-                                <TabsTrigger value="password">JSON</TabsTrigger>
-                            </TabsList>
-                            <div className="flex justify-end mt-2">
-                                <Badge variant={status === "complete" ? "null" : "destructive"}>
-                                    Status: {status}
-                                </Badge>
-                            </div>
-
-
-
-                            <TabsContent value="account">
-                                <Card>
-                                <CardContent className="space-y-2 w-[550px] h-[300px] overflow-x-auto overflow-y-auto">
-                                    <table className="min-w-full divide-y divide-gray-200">
-                                        <thead className="bg-gray-50">
-                                            <tr>
-                                                <th scope="col" className="w-1/2 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Field
-                                                </th>
-                                                <th scope="col" className="w-1/2 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                                    Value
-                                                </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className="bg-white divide-y divide-gray-200">
-                                            {disposedData.map((entry, index) => (
-                                                <React.Fragment key={index}>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan No</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_no}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan Place</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_place}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Owner Name</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.owner_name}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Received Amount</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.received_amount}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Name of Violator</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.name_of_violator}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan Status</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_status}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Offensive Details</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.offence_details[0].name}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Date & Time</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_date_time}</td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colSpan="2" className="py-5 bg-gray-100"></td>
-                                                    </tr>
-                                                </React.Fragment>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                </CardContent>
-
-
-                                </Card>
-                            </TabsContent>
-                            <TabsContent value="password">
-                                <Card>
-                                    <CardContent className="space-y-1 w-[550px]  h-[300px] overflow-x-auto overflow-y-auto scrollbar-w-[10px] scrollbar-thumb-rounded-full scrollbar-thumb-gray-500 ">
-                                        {/* Render JSON data here */}
-                                        <pre className="text-sm p-2">{JSON.stringify(outputData, null, 2)}</pre>
-                                    </CardContent>
-                                </Card>
-                            </TabsContent>
-                        </Tabs>
+                        
                         <div className="flex gap-3">
                             <Button onClick={() => navigator.clipboard.writeText(JSON.stringify(outputData))}>
                                 <Copy className="mr-2 h-4 w-4" /> Copy JSON
