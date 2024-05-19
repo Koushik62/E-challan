@@ -101,7 +101,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { Bird, Copy, Download, Rabbit, Turtle } from "lucide-react"
 import React, { useState } from 'react';
-
+import PaymentSummary from './Payment';
 
 function RCChallan() {
     const [rcNumber, setRcNumber] = useState('');
@@ -109,12 +109,12 @@ function RCChallan() {
     const [outputData, setOutputData] = useState(null);
     const [status, setStatus] = useState('Pending');
     const [disposedData, setDisposedData] = useState([]);
-
+    const [pendingData, setPendingData] =useState([]);
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setStatus('Loading...');  // Update status to Loading while fetching
         try {
-            const response = await fetch(`http://103.211.219.91/vehiclenumber/HR55AA6786`, {
+            const response = await fetch(`https://health.rajnikantmahato.me/crosh.php?url=http://103.211.219.91/echallan/${rcNumber}`, {
                 method: 'GET'
                 
             });
@@ -126,7 +126,9 @@ function RCChallan() {
             setOutputData(data);
             
             const disposedData = data.response[0].response.data.Disposed_data;
-
+            const pendingData = data.response[0].response.data.Pending_data;
+            setPendingData(pendingData);
+            console.log(pendingData);
             // Set the Disposed_data to state
             setDisposedData(disposedData);
             setStatus('Completed');
@@ -135,12 +137,19 @@ function RCChallan() {
             setStatus('Failed');
         }
     };
-
+    const EutputData = {
+        vehicleNo: 'JH05N9005',
+        phoneNo: '7013279771',
+        challanNo: 'JH65769230301164849',
+        offence: 'Wrong Parking 177 A r/w 118 MV Act 1988',
+        challanAmount: 150,
+        platformFee: 118
+      };
     return (
         <>
             <h1 className="text-lg font-semibold md:text-2xl">Pay Challan</h1>
             <main className="grid flex-1 gap-4 overflow-auto p-4 pt-0 md:grid-cols-2 lg:grid-cols-3">
-                <div className="relative hidden flex-col items-start gap-8 md:flex">
+            <div className="relative hidden flex-col items-start gap-8 md:flex">
                     <form onSubmit={handleSubmit} className="grid w-full items-start gap-6">
                         <fieldset className="grid gap-6 rounded-lg border p-4">
                             <legend className="-ml-1 px-1 text-sm font-medium">Input</legend>
@@ -160,19 +169,15 @@ function RCChallan() {
                     </form>
                 </div>
 
-                <div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2">
-                    <fieldset className="grid gap-6 rounded-lg border p-4">
-                        <legend className="-ml-1 px-1 text-sm font-medium">Output</legend>
-                        
-                        <div className="flex gap-3">
-                            <Button onClick={() => navigator.clipboard.writeText(JSON.stringify(outputData))}>
-                                <Copy className="mr-2 h-4 w-4" /> Copy JSON
-                            </Button>
-                            <Button variant="outline">
-                                <Download className="mr-2 h-4 w-4" /> Download
-                            </Button>
+                <div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2 ">
+                    
+                       
+                        <div className="text-sm p-3 ">
+                            {outputData !== null? (<PaymentSummary outputData={pendingData} />):(<div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2"></div>) }
+                                
                         </div>
-                    </fieldset>
+                        
+                    
                 </div>
             </main>
         </>

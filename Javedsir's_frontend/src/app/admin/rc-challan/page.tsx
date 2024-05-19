@@ -109,7 +109,7 @@ function RCChallan() {
     const [outputData, setOutputData] = useState(null);
     const [status, setStatus] = useState('Pending');
     const [disposedData, setDisposedData] = useState([]);
-
+    const [pendingData, setPendingData] = useState([]);
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setStatus('Loading...');  // Update status to Loading while fetching
@@ -126,7 +126,8 @@ function RCChallan() {
             setOutputData(data);
             
             const disposedData = data.response[0].response.data.Disposed_data;
-
+            const pendingData = data.response[0].response.data.Pending_data;
+            setPendingData(pendingData);
             // Set the Disposed_data to state
             setDisposedData(disposedData);
             setStatus('Completed');
@@ -216,6 +217,47 @@ function RCChallan() {
                                                     <tr>
                                                         <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan Status</td>
                                                         <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_status}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Offensive Details</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.offence_details[0].name}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Date & Time</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_date_time}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colSpan="2" className="py-5 bg-gray-100"></td>
+                                                    </tr>
+                                                </React.Fragment>
+                                            ))}
+                                        </tbody>
+                                        <tbody className="bg-white divide-y divide-gray-200">
+                                            {pendingData.map((entry, index) => (
+                                                <React.Fragment key={index}>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan No</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_no}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan Place</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_place}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Owner Name</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.owner_name}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Received Amount</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.received_amount}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Name of Violator</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.name_of_violator}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 ">Challan Status</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm  text-red-500 font-bold">{entry.challan_status}</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Offensive Details</td>
