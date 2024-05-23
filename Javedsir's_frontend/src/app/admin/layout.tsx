@@ -65,7 +65,7 @@ export default function AdminLayout({
         },
         {
             title: 'Credits and Pricing',
-            href: 'customers',
+            href: 'Credits',
             icon: DollarSign,
             variant: 'ghost',
         },

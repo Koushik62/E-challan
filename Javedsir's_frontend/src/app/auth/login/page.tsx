@@ -1,20 +1,85 @@
-"use client";
 
-import Image from "next/image"
-import Link from "next/link"
 
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
-import { useRouter } from "next/navigation"
+"use client"
+import React, { useState } from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useRouter } from "next/navigation";
+import bcrypt from "bcryptjs";
 
 export default function Login() {
+  const router = useRouter();
 
-    const router = useRouter()
+  const [state, setState] = useState("Login");
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    companyname: "",
+    number: "",
+  });
 
-    const handlLogin = () => {
-        router.replace('/admin/dashboard');
+  const changeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleAction = async () => {
+    if (state === "Login") {
+      await login();
+    } else {
+      await signup();
     }
+  };
+
+  const login = async () => {
+    console.log("Login Function Executed", formData);
+    let responseData;
+    await fetch("http://localhost:4000/login", {
+      method: "POST",
+      headers: {
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      .then((data) => (responseData = data));
+
+    if (responseData.success) {
+      localStorage.setItem("auth-token", responseData.token);
+      router.replace("/admin/dashboard");
+    } else {
+      alert(responseData.errors);
+    }
+  };
+
+  const signup = async () => {
+    console.log("Signup Function Executed", formData);
+    const hashedPassword = await bcrypt.hash(formData.password, 10);
+
+    let responseData;
+    await fetch("http://localhost:4000/signup", {
+      method: "POST",
+      headers: {
+        Accept: "application/form-data",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ ...formData, password: hashedPassword }),
+    })
+      .then((response) => response.json())
+      .then((data) => (responseData = data));
+
+    if (responseData.success) {
+      localStorage.setItem("auth-token", responseData.token);
+      router.replace("/admin/dashboard");
+    } else {
+      alert(responseData.errors);
+    }
+  };
+
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
       <div className="flex items-center justify-center py-12">
@@ -26,10 +91,54 @@ export default function Login() {
             </p>
           </div>
           <div className="grid gap-4">
+            {state === "Sign Up" && (
+              <>
+                <div className="grid gap-2">
+                  <Label htmlFor="username">Username</Label>
+                  <Input
+                    id="username"
+                    name="username"
+                    value={formData.username}
+                    onChange={changeHandler}
+                    placeholder="Your name"
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="companyname">Company Name</Label>
+                  </div>
+                  <Input
+                    id="companyname"
+                    name="companyname"
+                    value={formData.companyname}
+                    onChange={changeHandler}
+                    placeholder="Enter the company name"
+                    required
+                  />
+                </div>
+                <div className="grid gap-2">
+                  <div className="flex items-center">
+                    <Label htmlFor="number">Phone Number</Label>
+                  </div>
+                  <Input
+                    id="number"
+                    name="number"
+                    value={formData.number}
+                    onChange={changeHandler}
+                    placeholder="Enter Phone number"
+                    required
+                  />
+                </div>
+              </>
+            )}
             <div className="grid gap-2">
               <Label htmlFor="email">Email</Label>
               <Input
                 id="email"
+                name="email"
+                value={formData.email}
+                onChange={changeHandler}
                 type="email"
                 placeholder="m@example.com"
                 required
@@ -45,20 +154,38 @@ export default function Login() {
                   Forgot your password?
                 </Link>
               </div>
-              <Input id="password" type="password" required />
+              <Input
+                id="password"
+                name="password"
+                value={formData.password}
+                onChange={changeHandler}
+                type="password"
+                required
+              />
             </div>
-            <Button type="submit" className="w-full" onClick={handlLogin}>
-              Login
+            <Button type="submit" className="w-full" onClick={handleAction}>
+              {state === "Login" ? "Login" : "Sign Up"}
             </Button>
             <Button variant="outline" className="w-full">
               Login with Google
             </Button>
           </div>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
-            <Link href="#" className="underline">
-              Sign up
-            </Link>
+            {state === "Sign Up" ? (
+              <>
+                Already have an account?{" "}
+                <span className="underline" onClick={() => setState("Login")}>
+                  Login here
+                </span>
+              </>
+            ) : (
+              <>
+                Don't have an account?{" "}
+                <span className="underline" onClick={() => setState("Sign Up")}>
+                  Sign up
+                </span>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -72,5 +199,5 @@ export default function Login() {
         />
       </div>
     </div>
-  )
+  );
 }
