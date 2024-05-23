@@ -1,0 +1,174 @@
+.addhome {
+    display: flex;
+    background-color:  rgba(0, 0, 255, 0.018);
+    font-family:'Times New Roman', Times, serif;
+
+  }
+  
+  .addhome-left {
+    flex: 1;
+    padding: 20px;
+  }
+
+  .addhome-left h1,
+  .addhome-left h2{
+    padding-left: 15px;
+  }
+  
+  .addprocces {
+    display: flex;
+    flex-direction: column;
+    width: 88%;
+    margin-left: 10px;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 5px;
+  }
+  .addprocces input{
+    height: 1.7rem;
+    border-radius: 5px;
+    border:1px solid grey
+  }
+  
+  .addprocces:hover input{
+    border-color: blue;
+  }
+  .addprocces button {
+    width: 10rem;
+    background-color: rgb(12, 29, 216); /* Blue button */
+    border: none;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    animation: button-pulse 2s infinite ease-in-out; /* Added animation */
+    margin-left: auto;
+  }
+  
+  @keyframes button-pulse {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  
+  .addform-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    border-radius: 5px; /* Added border radius for boxes */
+    padding: 10px; /* Added padding for boxes */
+    margin: 1px solid grey;
+  }
+
+  #companyName{
+    height: 2rem;
+    width: 90%;
+   
+  }
+  #address{
+    height: 5rem;
+    width: 90%;
+  }
+
+  #statesbutton{
+    width: 40%;
+    height: 1.9rem;
+
+  }
+
+  #gstNumber{
+    width: 90%;
+    height: 1.9rem;
+  }
+  .radio-button {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%; /* Create a circle */
+    border: 2px solid #ccc; /* Add a border */
+    background-color: #fff; /* Initial background color */
+    transition: background-color 0.2s ease-in-out; /* Add smooth transition */
+  }
+  #hasGstNo {
+    background-color: blue; /* Background color for selected radio button */
+  }
+  .addform-group input,
+  .addform-group textarea
+  .addform-group label { /* Target input and textarea */
+    border: 0.5px solid  grey  ; /* Remove default border */
+    border-radius: 5px; /* Match box border radius */
+    padding: 5px; /* Adjust padding for input/textarea */
+    transition: border-color 0.2s ease-in-out; /* Smooth hover effect */
+    width: 90;
+   
+  }
+  
+  .addform-group:hover input,
+  .addform-group:hover textarea
+   {
+    border-color: blue; /* Blue border on hover */
+  }
+
+
+
+  .addvertical-line {
+    width: 1px;
+    border-left: 1px dotted #000; 
+    margin: 10px 10px; 
+   
+  }
+  
+  .addhome-right {
+    flex: 1;
+    background-color: white;
+    margin: 10px;
+
+  }
+  .addcredit-details{
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    margin:1px solid white;
+    justify-content:flex-end;
+  }
+
+  #creditBalance{
+    margin-left: auto;
+  }
+  
+  .hdivider{
+    border: 0.1px solid rgb(192, 193, 193)
+  }
+
+  .paymentdetails{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .finalamountpay{
+    padding-top: 18px;
+  }
+
+  .hdivider1{
+    border-bottom: 1.4px dotted black;
+  }
+
+  .Proceedtopayment{
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+  .Proceedtopayment button{
+    background-color: rgb(0, 184, 135); /* Sets the background color of the button to green */
+    color: white; /* Sets the text color of the button to white */
+    border: none; /* Removes border */
+    padding: 10px 20px; /* Adds padding */
+    cursor: pointer; /* Changes cursor to pointer on hover */
+    border-radius: 5px; /* Rounds the corners of the button */
+  }

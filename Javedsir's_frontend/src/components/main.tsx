@@ -65,6 +65,7 @@ import {
   Users2,
 } from "lucide-react"
 import Link from "next/link"
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 
 export default function Main() {
   return (

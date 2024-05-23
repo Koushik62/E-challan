@@ -127,6 +127,7 @@ function RCChallan() {
             
             const disposedData = data.response[0].response.data.Disposed_data;
             const pendingData = data.response[0].response.data.Pending_data;
+            console.log(disposedData);
             setPendingData(pendingData);
             // Set the Disposed_data to state
             setDisposedData(disposedData);
@@ -233,6 +234,11 @@ function RCChallan() {
                                             ))}
                                         </tbody>
                                         <tbody className="bg-white divide-y divide-gray-200">
+                                        {status === 'Loading...' && (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+                                            <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
+                                            </div>
+                                        )}
                                             {pendingData.map((entry, index) => (
                                                 <React.Fragment key={index}>
                                                     <tr>

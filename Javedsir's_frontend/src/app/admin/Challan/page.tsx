@@ -102,6 +102,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Bird, Copy, Download, Rabbit, Turtle } from "lucide-react"
 import React, { useState } from 'react';
 import PaymentSummary from './Payment';
+import { stat } from "fs";
 
 function RCChallan() {
     const [rcNumber, setRcNumber] = useState('');
@@ -124,27 +125,32 @@ function RCChallan() {
             const data = await response.json();
             console.log(data);
             setOutputData(data);
+            if (data.response[0].response.message === "No Records Found!") {
+                setOutputData(data.response[0].response.message);
+                setStatus('Failed');
+            } else if(data.response[0].response.data.Pending_data.length  !== 0) {
+                const disposedData = data.response[0].response.data.Disposed_data;
+                const pendingData = data.response[0].response.data.Pending_data;
+                setPendingData(pendingData);
+                console.log(pendingData);
+                // Set the Disposed_data to state
+                setDisposedData(disposedData);
+                setStatus('Completed');
+            } else{
+                setStatus('Clean');
+
+                console.log('clean'); 
+            }
+             
             
-            const disposedData = data.response[0].response.data.Disposed_data;
-            const pendingData = data.response[0].response.data.Pending_data;
-            setPendingData(pendingData);
-            console.log(pendingData);
-            // Set the Disposed_data to state
-            setDisposedData(disposedData);
-            setStatus('Completed');
+            
+            
         } catch (error) {
             console.error('Error fetching data: ', error);
             setStatus('Failed');
         }
     };
-    const EutputData = {
-        vehicleNo: 'JH05N9005',
-        phoneNo: '7013279771',
-        challanNo: 'JH65769230301164849',
-        offence: 'Wrong Parking 177 A r/w 118 MV Act 1988',
-        challanAmount: 150,
-        platformFee: 118
-      };
+    
     return (
         <>
             <h1 className="text-lg font-semibold md:text-2xl">Pay Challan</h1>
@@ -167,18 +173,43 @@ function RCChallan() {
                             </div>
                         </fieldset>
                     </form>
-                </div>
+            </div>
 
-                <div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2 ">
+                
                     
-                       
-                        <div className="text-sm p-3 ">
-                            {outputData !== null? (<PaymentSummary outputData={pendingData} />):(<div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2"></div>) }
-                                
+            <div className="relative flex h-full min-h-[50vh] flex-col lg:col-span-2">
+            {status === 'Loading...' && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+                    <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
+                </div>
+            )}
+    {outputData !== null && (
+        <>
+            
+            <div className="text-sm p-3">
+                {outputData === 'No Records Found!' ? (
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                        No Records Found!
+                    </div>
+                ) : (
+                    status === 'Clean' ? (
+                        <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative">
+                            Congratulations! Your record is as clean as a whistle! Keep up the stellar driving!
                         </div>
+                    ) : (
+                        <PaymentSummary outputData={pendingData} />
+                    )
+                )}
+            </div>
+        </>
+    )}
+</div>
+
+
+
                         
                     
-                </div>
+               
             </main>
         </>
     );

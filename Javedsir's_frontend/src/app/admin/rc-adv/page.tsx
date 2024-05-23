@@ -101,7 +101,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { Bird, Copy, Download, Rabbit, Turtle } from "lucide-react"
 import React, { useState } from 'react';
-
+import axios from 'axios';
 
 function RCChallan() {
     const [rcNumber, setRcNumber] = useState('');
@@ -110,31 +110,43 @@ function RCChallan() {
     const [status, setStatus] = useState('Pending');
     const [disposedData, setDisposedData] = useState([]);
 
-    const handleSubmit = async (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        setStatus('Loading...');  // Update status to Loading while fetching
-        try {
-            const response = await fetch(`http://103.211.219.91/vehiclenumber/HR55AA6786`, {
-                method: 'GET'
-                
-            });
-            if (!response.ok) {
-                throw new Error('Failed to fetch data');
-            }
-            const data = await response.json();
-            console.log(data);
-            setOutputData(data);
-            
-            const disposedData = data.response[0].response.data.Disposed_data;
+    
 
-            // Set the Disposed_data to state
-            setDisposedData(disposedData);
-            setStatus('Completed');
-        } catch (error) {
-            console.error('Error fetching data: ', error);
-            setStatus('Failed');
+const handleSubmit = async (e: { preventDefault: () => void; }) => {
+    e.preventDefault();
+    setStatus('Loading...');  // Update status to Loading while fetching 
+
+    const options = {
+        method: 'POST',
+        url: 'https://rto-vehicle-information-india.p.rapidapi.com/getVehicleInfo',
+        headers: {
+            'Content-type': 'application/json',
+            'X-RapidAPI-Key': '742c463415msh55159cb981c077ep151d70jsnccb39958e318',
+            'X-RapidAPI-Host': 'rto-vehicle-information-india.p.rapidapi.com'
+        },
+        data: {
+            vehicle_no: `${rcNumber}`,
+            consent: 'Y',
+            consent_text: 'I hereby give my consent for Eccentric Labs API to fetch my information'
         }
     };
+
+    try {
+        const response = await axios.request(options);
+        console.log(response.data.data);
+        setOutputData(response.data.data);
+
+        const disposedData = response.data.data;
+        console.log(disposedData);
+        // Set the Disposed_data to state
+        setDisposedData(disposedData);
+        setStatus('Completed');
+    } catch (error) {
+        console.error('Error fetching data: ', error);
+        setStatus('Failed');
+    }
+};
+
 
     return (
         <>
@@ -190,46 +202,78 @@ function RCChallan() {
                                                 </th>
                                             </tr>
                                         </thead>
+                                        {status === 'Loading...' && (
+                                            <div className="absolute inset-0 flex items-center justify-center bg-gray-100 bg-opacity-75 z-50">
+                                            <div className="loader ease-linear rounded-full border-8 border-t-8 border-gray-200 h-24 w-24"></div>
+                                            </div>
+                                        )}
+                                        
                                         <tbody className="bg-white divide-y divide-gray-200">
-                                            {disposedData.map((entry, index) => (
-                                                <React.Fragment key={index}>
+                                        
+                                            {status === 'Completed'  ? (
+                                                <>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan No</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_no}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Registration Authority</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.registration_authority}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan Place</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_place}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Registration No</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.registration_no}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Registration Date</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.registration_date}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Chassis No</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.chassis_no}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Engine No</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.engine_no}</td>
                                                     </tr>
                                                     <tr>
                                                         <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Owner Name</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.owner_name}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.owner_name}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Received Amount</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.received_amount}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Vehicle Class</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.vehicle_class}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Name of Violator</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.name_of_violator}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Fuel Type</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.fuel_type}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Challan Status</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_status}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Maker Model</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.maker_model}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Offensive Details</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.offence_details[0].name}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Fitness Upto</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.fitness_upto}</td>
                                                     </tr>
                                                     <tr>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Date & Time</td>
-                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{entry.challan_date_time}</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Insurance Upto</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.insurance_upto}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Fuel Norms</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.fuel_norms}</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Road Tax Paid Upto</td>
+                                                        <td className="w-1/2 px-6 py-4 whitespace-nowrap text-sm text-gray-500">{disposedData.road_tax_paid_upto}</td>
                                                     </tr>
                                                     <tr>
                                                         <td colSpan="2" className="py-5 bg-gray-100"></td>
                                                     </tr>
-                                                </React.Fragment>
-                                            ))}
+                                                    </> 
+                                                    
+                                                ) : (
+                                                <tr>
+                                                    <td colSpan="2" className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Loading...</td>
+                                                </tr>
+                                                )}
                                         </tbody>
                                     </table>
                                 </CardContent>
@@ -262,6 +306,7 @@ function RCChallan() {
 }
 
 export default RCChallan;
+
 
 
 
