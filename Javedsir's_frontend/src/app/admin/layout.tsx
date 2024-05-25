@@ -88,10 +88,12 @@ export default function AdminLayout({
         
     ]
     const [credits, setCredits] = useState(0);
+    const [username,setUserName] = useState();
     useEffect(() => {
         // Fetch user's credis when the component mounts
         
         fetchUserCredits();
+        fetchUserName();
       }, []);
       const fetchUserCredits = () => {
         const token = localStorage.getItem('auth-token');
@@ -110,7 +112,24 @@ export default function AdminLayout({
             console.error('Error fetching user credits:', error);
           });
       };
+
+      const fetchUserName = () => {
+        const token = localStorage.getItem('auth-token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
     
+        axios.get('http://localhost:4000/username', config)
+          .then(response => {
+            const { userName } = response.data;
+            setUserName(userName);
+          })
+          .catch(error => {
+            console.error('Error fetching user name:', error);
+          });
+      };
 
     return (
         <>
@@ -232,13 +251,16 @@ export default function AdminLayout({
                                     <span className="sr-only">Toggle user menu</span>
                                 </Button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end">
+                            <DropdownMenuContent align="end" className="cursor-pointer  ">
                                 <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuSeparator />
+                                <DropdownMenuLabel>{username}</DropdownMenuLabel>
                                 <DropdownMenuItem>Settings</DropdownMenuItem>
                                 <DropdownMenuItem>Support</DropdownMenuItem>
+                               
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem onClick={()=>window.location.replace('/')}>Logout</DropdownMenuItem>
+                                <DropdownMenuItem onClick={()=>window.location.replace('/')}><span className="cursor">Logout</span></DropdownMenuItem>
+                                
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </header>

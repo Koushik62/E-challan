@@ -71,6 +71,38 @@ const PaymentSummary = ({ outputData }) => {
 //     var pay = new window.Razorpay(options);
 //     pay.open();
 //     console.log(pay);
+
+const handleAddCredits = (amount) => {
+  const token = localStorage.getItem('auth-token');
+  console.log(token);
+
+  const config = {
+      headers: {
+          'Authorization': `Bearer ${token}`
+      }
+  };
+
+  const body = {
+      credits: amount
+  };
+
+  axios.post('http://localhost:4000/addcredits', body, config)
+  .then(response => {
+      // Credits incremented successfully
+      const data = response.data;
+      console.log('Credits incremented:', data.userCredits);
+      const { userCredits } = data;
+      
+      // Proceed with other operations after credits are incremented
+  })
+  .catch(error => {
+      // Error incrementing credits
+      console.error('Error incrementing credits:', error);
+      // Handle error if needed
+  });
+};
+
+
       const calculateTotalAmount = () => {
         let total = 0;
         outputData.forEach(entry => {

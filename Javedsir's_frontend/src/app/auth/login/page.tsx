@@ -34,49 +34,56 @@ export default function Login() {
 
   const login = async () => {
     console.log("Login Function Executed", formData);
+
+    if (!formData.email || !formData.password) {
+        alert("Please enter both email and password");
+        return;
+    }
+
     let responseData;
     await fetch('http://localhost:4000/login', {
         method: 'POST',
         headers: {
-            Accept: 'application/form-data',
+            Accept: 'application/json',
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
     })
         .then((response) => response.json())
         .then((data) => (responseData = data));
-  
+
     if (responseData.success) {
         localStorage.setItem('auth-token', responseData.token);
         window.location.replace('/admin/dashboard');
     } else {
         alert("Login failed: " + responseData.errors); // Display login failure message
     }
-  };
+};
+
   
-  const signup = async () => {
-    console.log("Signup Function Executed", formData);
-    const hashedPassword = await bcrypt.hash(formData.password, 10); // Hash the password
-  
-    let responseData;
-    await fetch('http://localhost:4000/signup', {
-        method: 'POST',
-        headers: {
-            Accept: 'application/form-data',
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ ...formData, password: hashedPassword }), // Send the hashed password
-    })
-        .then((response) => response.json())
-        .then((data) => (responseData = data));
-  
-    if (responseData.success) {
-        localStorage.setItem('auth-token', responseData.token);
-        window.location.replace('/admin/dashboard');
-    } else {
-        alert("Signup failed: " + responseData.errors); // Display signup failure message
-    }
-  };
+const signup = async () => {
+  console.log("Signup Function Executed", formData);
+
+  let responseData;
+  await fetch('http://localhost:4000/signup', {
+      method: 'POST',
+      headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData), // Send the plain password
+  })
+      .then((response) => response.json())
+      .then((data) => (responseData = data));
+
+  if (responseData.success) {
+      localStorage.setItem('auth-token', responseData.token);
+      window.location.replace('/admin/dashboard');
+  } else {
+      alert("Signup failed: " + responseData.errors); // Display signup failure message
+  }
+};
+
 
   return (
     <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px]">
@@ -161,10 +168,10 @@ export default function Login() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full" onClick={()=>{state === "Login"?login():signup()}}>
+            <Button type="submit" className="w-full cursor-pointer" onClick={()=>{state === "Login"?login():signup()}}>
               {state === "Login" ? "Login" : "Sign Up"}
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button variant="outline" className="w-full cursor">
               Login with Google
             </Button>
           </div>
@@ -172,14 +179,14 @@ export default function Login() {
             {state === "Sign Up" ? (
               <>
                 Already have an account?{" "}
-                <span className="underline" onClick={() => setState("Login")}>
+                <span className="underline cursor-pointer" onClick={() => setState("Login")}>
                   Login here
                 </span>
               </>
             ) : (
               <>
                 Don't have an account?{" "}
-                <span className="underline" onClick={() => setState("Sign Up")}>
+                <span className="underline cursor-pointer" onClick={() => setState("Sign Up")}>
                   Sign up
                 </span>
               </>

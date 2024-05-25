@@ -281,6 +281,7 @@ app.post('/signup', async (req, res) => {
   }
 });
 
+
 // Endpoint for user login
 app.post('/login', async (req, res) => {
   try {
@@ -288,10 +289,11 @@ app.post('/login', async (req, res) => {
       let user = await Users.findOne({ email: req.body.email });
       if (user) {
           // Compare hashed passwords
-          console.log(req.body.password)
-          const passCompare = bcrypt.compare(req.body.password, user.password);
-          console.log(bcrypt.hash(req.body.password, 10))
+          const passCompare = await bcrypt.compare(req.body.password, user.password); // Add await here
+          console.log(req.body.password);
+          console.log(await bcrypt.hash(req.body.password, 10)); // Example of hashing a password
           console.log(passCompare);
+
           if (passCompare) {
               // Generate JWT token
               const token = jwt.sign({ user: { id: user.id } }, 'secret_ecom');
@@ -307,6 +309,8 @@ app.post('/login', async (req, res) => {
       res.status(500).json({ success: false, errors: "Internal server error" });
   }
 });
+
+
 // get request it getch intial details 
 app.get('/credits', async (req, res) => {
   try {
@@ -323,8 +327,34 @@ app.get('/credits', async (req, res) => {
     }
 
     res.status(200).json({ userCredits: user.credits });
+    
   } catch (error) {
     console.error('Error fetching user credits:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+// to fetch usename
+app.get('/username', async (req, res) => {
+  try {
+    // Assuming token is sent in the Authorization header
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'secret_ecom');
+    const userId = decoded.user.id;
+
+    // Find the user by ID
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ userName : user.name });
+    
+   
+  } catch (error) {
+    console.error('Error fetching user name:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
@@ -480,6 +510,46 @@ app.post('/credits', (req, res) => {
       res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+
+// after successful payment this will be called
+app.post('/addcredits', (req, res) => {
+  try {
+      // Assuming token is sent in the Authorization header
+      const token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, 'secret_ecom');
+      const userId = decoded.user.id;
+
+      // Extract the amount of credits to add from the request body
+      const { credits } = req.body;
+      if (!credits || typeof credits !== 'number' || credits <= 0) {
+          return res.status(400).json({ error: 'Invalid credits amount' });
+      }
+
+      // Find the user by ID
+      Users.findById(userId)
+          .then(user => {
+              if (!user) {
+                  return res.status(404).json({ error: 'User not found' });
+              }
+
+              // Increment user's credits
+              user.credits += credits; // Increase by the specified amount
+              return user.save();
+          })
+          .then(updatedUser => {
+              res.status(200).json({ message: 'Credits added successfully', userCredits: updatedUser.credits });
+          })
+          .catch(error => {
+              console.error('Error adding credits:', error);
+              res.status(500).json({ error: 'Internal server error' });
+          });
+  } catch (error) {
+      console.error('Error adding credits:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 
 // for adv rc details
 app.post('/advcredits', (req, res) => {
