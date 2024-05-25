@@ -1,46 +1,88 @@
+
+"use client"
 import { Button } from "@/components/ui/button";
 import { CirclePlus } from "lucide-react";
 import Link from "next/link";
-
+import { useState , useEffect } from "react";
+import axios from "axios";
 export default function Applications() {
+  const [rcAdvTask, setRcAdvtask] = useState(0);
+  const [rcChallanTask,setRcChallanTask] = useState(0);
+    useEffect(() => {
+        // Fetch user's credis when the component mounts
+        
+        fetchRcadvtask();
+        fetchchallantask();
+      }, []);
+
+      const fetchchallantask = () => {
+        const token = localStorage.getItem('auth-token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+    
+        axios.get('http://localhost:4000/Rcchallantask', config)
+          .then(response => {
+            const { Rcchallantask} = response.data;
+            setRcChallanTask(Rcchallantask);
+          })
+          .catch(error => {
+            console.error('Error fetching user credits:', error);
+          });
+      };
+
+      const fetchRcadvtask = () => {
+        const token = localStorage.getItem('auth-token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+    
+        axios.get('http://localhost:4000/Rcadvtask', config)
+          .then(response => {
+            const { Rcadvtask } = response.data;
+            setRcAdvtask(Rcadvtask);
+          })
+          .catch(error => {
+            console.error('Error fetching user credits:', error);
+          });
+      };
     return (
         <>
-            <div className="flex items-center">
+            <div className="flex items-center mb-4">
                 <h1 className="text-lg font-semibold md:text-2xl">Applications</h1>
             </div>
-            <table className="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col">Service</th>
-      <th scope="col">Rate</th>
-      <th scope="col">Test Task Completed</th>
-      <th scope="col">Test Credits Consumed</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>RC Basic Verification</td>
-      <td>3</td>
-      <td>7</td>
-      <td>21</td>
-    </tr>
-    <tr>
-      <td>RC Card OCR</td>
-      <td>3</td>
-      <td>1</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <td>RC Advanced Verification</td>
-      <td>8</td>
-      <td>18</td>
-      <td>144</td>
-    </tr>
-  </tbody>
-</table>
+            <table className="min-w-full bg-white border border-gray-300">
+                <thead>
+                    <tr>
+                        <th className="px-4 py-2 border-b border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Service</th>
+                        <th className="px-4 py-2 border-b border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Rate</th>
+                        <th className="px-4 py-2 border-b border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Test Task Completed</th>
+                        <th className="px-4 py-2 border-b border-gray-200 text-left text-sm leading-4 text-gray-600 tracking-wider">Test Credits Consumed</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td className="px-4 py-2 border-b border-gray-200">RC Challan</td>
+                        <td className="px-4 py-2 border-b border-gray-200">3</td>
+                        <td className="px-4 py-2 border-b border-gray-200">{rcChallanTask}</td>
+                        <td className="px-4 py-2 border-b border-gray-200">{rcChallanTask*3}</td>
+                    </tr>
+                    <tr>
+                        <td className="px-4 py-2 border-b border-gray-200">RC ADV</td>
+                        <td className="px-4 py-2 border-b border-gray-200">8</td>
+                        <td className="px-4 py-2 border-b border-gray-200">{rcAdvTask}</td>
+                        <td className="px-4 py-2 border-b border-gray-200">{rcAdvTask*8}</td>
+                    </tr>
+                   
+                </tbody>
+            </table>
 
-            <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm">
-                <div className="flex flex-col items-center gap-1 text-center">
+            <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed shadow-sm mt-8">
+                <div className="flex flex-col items-center gap-1 text-center p-4">
                     <h3 className="text-2xl font-bold tracking-tight">
                         You have no applications
                     </h3>
@@ -52,7 +94,6 @@ export default function Applications() {
                     </Link>
                 </div>
             </div> 
-         </>
+        </>
     )
 }
-

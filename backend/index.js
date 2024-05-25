@@ -47,7 +47,16 @@ const Users = mongoose.model('Users',{
   credits: {
     type: Number,
     default: 100 // Initial value of credits
-  }
+  },
+  Rcadvtask:{
+    type: Number,
+    default: 0
+  },
+  Rcchallantask:{
+    type: Number,
+    default: 0
+  },
+
 
 
 })
@@ -80,8 +89,15 @@ const Users_admin = mongoose.model('Admin',{
   credits: {
     type: Number,
     default: 100 // Initial value of credits
-  }
-
+  },
+  Rcadvtask:{
+    type: Number,
+    default: 0
+  },
+  Rcchallantask:{
+    type: Number,
+    default:0
+  },
 
 })
 
@@ -312,6 +328,122 @@ app.get('/credits', async (req, res) => {
     res.status(500).json({ error: 'Internal server error' });
   }
 });
+
+//for advcedits usage
+app.get('/Rcadvtask', async (req, res) => {
+  try {
+    // Assuming token is sent in the Authorization header
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'secret_ecom');
+    const userId = decoded.user.id;
+
+    // Find the user by ID
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({ Rcadvtask: user.Rcadvtask });
+  } catch (error) {
+    console.error('Error fetching user credits:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/Rcadvtask', (req, res) => {
+  try {
+    
+
+      // Assuming token is sent in the Authorization header
+      const token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, 'secret_ecom');
+      const userId = decoded.user.id;
+
+      // Find the user by ID
+      Users.findById(userId)
+          .then(user => {
+              if (!user) {
+                  return res.status(404).json({ error: 'User not found' });
+              }
+
+              // Decrease user's credits
+              user.Rcadvtask += 1; // Decrease by 3 credits
+              return user.save();
+          })
+          .then(updatedUser => {
+              res.status(200).json({ message: 'Challan viewed successfully', Rcadvtask: updatedUser.Rcadvtask });
+          })
+          .catch(error => {
+              console.error('Error viewing credits:', error);
+              res.status(500).json({ error: 'Internal server error' });
+          });
+  }
+  catch (error) {
+      console.error('Error viewing credits', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+//For challan  usage
+
+app.get('/Rcchallantask', async (req, res) => {
+  try {
+    // Assuming token is sent in the Authorization header
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, 'secret_ecom');
+    const userId = decoded.user.id;
+
+    // Find the user by ID
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({  Rcchallantask: user.Rcchallantask });
+  } catch (error) {
+    console.error('Error fetching user credits:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+app.post('/Rcchallantask', (req, res) => {
+  try {
+    
+
+      // Assuming token is sent in the Authorization header
+      const token = req.headers.authorization.split(' ')[1];
+      const decoded = jwt.verify(token, 'secret_ecom');
+      const userId = decoded.user.id;
+
+      // Find the user by ID
+      Users.findById(userId)
+          .then(user => {
+              if (!user) {
+                  return res.status(404).json({ error: 'User not found' });
+              }
+
+              // Decrease user's credits
+              user.Rcchallantask += 1; // Decrease by 3 credits
+              return user.save();
+          })
+          .then(updatedUser => {
+              res.status(200).json({ message: 'Challan viewed successfully', Rcchallantask: updatedUser.Rcchallantask });
+          })
+          .catch(error => {
+              console.error('Error viewing credits:', error);
+              res.status(500).json({ error: 'Internal server error' });
+          });
+  }
+  catch (error) {
+      console.error('Error viewing credits', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+
+
 
 
 

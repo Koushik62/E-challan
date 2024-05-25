@@ -1,7 +1,9 @@
+"use client"
 import Link from "next/link"
 import {
     Bell,
     CircleUser,
+    CreditCard, // Add CreditCard icon
     Home,
     LineChart,
     Menu,
@@ -37,12 +39,14 @@ import {
 import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { cn } from "@/lib/utils"
+import { useState, useEffect } from "react"
+import axios from "axios"
 interface NavProps {
-      title: string
-      href?: string
-      icon: LucideIcon
-      variant: "default" | "ghost"
-  }
+    title: string
+    href?: string
+    icon: LucideIcon
+    variant: "default" | "ghost"
+}
 
 export default function AdminLayout({
     children,
@@ -80,8 +84,34 @@ export default function AdminLayout({
             href: 'customers',
             icon: KeyRound,
             variant: 'ghost',
-        }
+        },
+        
     ]
+    const [credits, setCredits] = useState(0);
+    useEffect(() => {
+        // Fetch user's credis when the component mounts
+        
+        fetchUserCredits();
+      }, []);
+      const fetchUserCredits = () => {
+        const token = localStorage.getItem('auth-token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+    
+        axios.get('http://localhost:4000/credits', config)
+          .then(response => {
+            const { userCredits } = response.data;
+            setCredits(userCredits);
+          })
+          .catch(error => {
+            console.error('Error fetching user credits:', error);
+          });
+      };
+    
+
     return (
         <>
             <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -116,7 +146,6 @@ export default function AdminLayout({
                                 ))}
                             </nav>
                         </div>
-
                     </div>
                 </div>
                 <div className="flex flex-col">
@@ -187,6 +216,15 @@ export default function AdminLayout({
                                 </div>
                             </form>
                         </div>
+                        <Link href="/admin/credits" className="ml-20"> {/* Adjusted margin */}
+                            <Button variant="secondary" size="icon" className="w-24"> {/* Increased width */}
+                                <CreditCard className="h-5 w-5" />
+                                <span className="sr-only">Credits hijoasdoo</span>
+                                <p>Credits:{credits}</p>
+                            </Button>
+                        </Link>
+
+
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="secondary" size="icon" className="rounded-full">
@@ -200,7 +238,7 @@ export default function AdminLayout({
                                 <DropdownMenuItem>Settings</DropdownMenuItem>
                                 <DropdownMenuItem>Support</DropdownMenuItem>
                                 <DropdownMenuSeparator />
-                                <DropdownMenuItem>Logout</DropdownMenuItem>
+                                <DropdownMenuItem onClick={()=>window.location.replace('/')}>Logout</DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     </header>

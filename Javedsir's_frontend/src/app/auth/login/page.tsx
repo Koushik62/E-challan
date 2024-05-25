@@ -1,6 +1,4 @@
-
-
-"use client"
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -37,46 +35,46 @@ export default function Login() {
   const login = async () => {
     console.log("Login Function Executed", formData);
     let responseData;
-    await fetch("http://localhost:4000/login", {
-      method: "POST",
-      headers: {
-        Accept: "application/form-data",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+    await fetch('http://localhost:4000/login', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/form-data',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      .then((data) => (responseData = data));
-
+        .then((response) => response.json())
+        .then((data) => (responseData = data));
+  
     if (responseData.success) {
-      localStorage.setItem("auth-token", responseData.token);
-      router.replace("/admin/dashboard");
+        localStorage.setItem('auth-token', responseData.token);
+        window.location.replace('/admin/dashboard');
     } else {
-      alert(responseData.errors);
+        alert("Login failed: " + responseData.errors); // Display login failure message
     }
   };
-
+  
   const signup = async () => {
     console.log("Signup Function Executed", formData);
-    const hashedPassword = await bcrypt.hash(formData.password, 10);
-
+    const hashedPassword = await bcrypt.hash(formData.password, 10); // Hash the password
+  
     let responseData;
-    await fetch("http://localhost:4000/signup", {
-      method: "POST",
-      headers: {
-        Accept: "application/form-data",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ ...formData, password: hashedPassword }),
+    await fetch('http://localhost:4000/signup', {
+        method: 'POST',
+        headers: {
+            Accept: 'application/form-data',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ ...formData, password: hashedPassword }), // Send the hashed password
     })
-      .then((response) => response.json())
-      .then((data) => (responseData = data));
-
+        .then((response) => response.json())
+        .then((data) => (responseData = data));
+  
     if (responseData.success) {
-      localStorage.setItem("auth-token", responseData.token);
-      router.replace("/admin/dashboard");
+        localStorage.setItem('auth-token', responseData.token);
+        window.location.replace('/admin/dashboard');
     } else {
-      alert(responseData.errors);
+        alert("Signup failed: " + responseData.errors); // Display signup failure message
     }
   };
 
@@ -163,7 +161,7 @@ export default function Login() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full" onClick={handleAction}>
+            <Button type="submit" className="w-full" onClick={()=>{state === "Login"?login():signup()}}>
               {state === "Login" ? "Login" : "Sign Up"}
             </Button>
             <Button variant="outline" className="w-full">

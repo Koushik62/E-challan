@@ -40,6 +40,7 @@ const states = [
 ];
 
 const Applications = () => {
+
   const [click, setClick] = useState(false);
   const [companyName, setCompanyName] = useState("");
   const [address, setAddress] = useState("");

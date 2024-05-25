@@ -100,8 +100,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Textarea } from "@/components/ui/textarea"
 import { Bird, Copy, Download, Rabbit, Turtle } from "lucide-react"
-import React, { useState } from 'react';
-
+import React, { useState , useEffect} from 'react';
+import axios from "axios";
 
 function RCChallan() {
     const [rcNumber, setRcNumber] = useState('');
@@ -110,6 +110,8 @@ function RCChallan() {
     const [status, setStatus] = useState('Pending');
     const [disposedData, setDisposedData] = useState([]);
     const [pendingData, setPendingData] = useState([]);
+    const [credits, setCredits] = useState(0);
+    const [rcchallantask, setRcChallanTask] = useState(0);
     const handleSubmit = async (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         setStatus('Loading...');  // Update status to Loading while fetching
@@ -136,11 +138,91 @@ function RCChallan() {
             console.error('Error fetching data: ', error);
             setStatus('Failed');
         }
+
     };
+
+    useEffect(() => {
+        // Fetch user's credis when the component mounts
+        
+        fetchUserCredits();
+      }, []);
+    
+      const fetchUserCredits = () => {
+        const token = localStorage.getItem('auth-token');
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        };
+    
+        axios.get('http://localhost:4000/credits', config)
+          .then(response => {
+            const { userCredits } = response.data;
+            setCredits(userCredits);
+          })
+          .catch(error => {
+            console.error('Error fetching user credits:', error);
+          });
+      };
+      const handleViewChallan = () => {
+        console.log(rcNumber);
+      
+        const token = localStorage.getItem('auth-token');
+        console.log(token);
+       
+        const config = {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        };
+    
+        axios.post('http://localhost:4000/credits', {}, config)
+        .then(response => {
+            // Credits decremented successfully
+            const data = response.data;
+            console.log('Credits decremented:', data.userCredits);
+            const { userCredits } = response.data;
+            setCredits(userCredits)
+            
+            // Proceed with other operations after credits are decremented
+            
+        })
+        .catch(error => {
+            // Error decrementing credits
+            console.error('Error decrementing credits:', error);
+            // Handle error if needed
+        });
+        axios.post('http://localhost:4000/Rcchallantask', {}, config)
+        .then(response => {
+            // Credits decremented successfully
+            const data = response.data;
+            console.log('Credits decremented:', data.userCredits);
+            const { Rcchallantask } = response.data;
+            setRcChallanTask(Rcchallantask)
+            
+            // Proceed with other operations after credits are decremented
+            
+        })
+        .catch(error => {
+            // Error decrementing credits
+            console.error('Error decrementing credits:', error);
+            // Handle error if needed
+        });
+    } 
+    
+
+        
+
+
 
     return (
         <>
-            <h1 className="text-lg font-semibold md:text-2xl">RC Challan API</h1>
+           <h1 className="flex items-center gap-6 text-lg font-semibold md:text-2xl">
+                RC Challan API
+                <span className="rounded-full bg-blue-200 px-3 py-1 text-black text-sm">
+                    3 credits per usage
+                </span>
+            </h1>
             <main className="grid flex-1 gap-4 overflow-auto p-4 pt-0 md:grid-cols-2 lg:grid-cols-3">
                 <div className="relative hidden flex-col items-start gap-8 md:flex">
                     <form onSubmit={handleSubmit} className="grid w-full items-start gap-6">
@@ -155,7 +237,7 @@ function RCChallan() {
                                 <Input type="text" placeholder="Eg. 00364" value={chassisNumber} onChange={(e) => setChassisNumber(e.target.value)} />
                             </div>
                             <div className="flex justify-between">
-                                <Button type="submit">Run API</Button>
+                                <Button type="submit" onClick={handleViewChallan}>Run API</Button>
                                 <Button variant="outline">Sample</Button>
                             </div>
                         </fieldset>
