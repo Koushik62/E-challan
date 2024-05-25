@@ -8,6 +8,7 @@ import {
   BarChart3,
   CirclePlus,
   DollarSign,
+  BadgeDollarSign,
 } from "lucide-react";
 import Link from "next/link";
 import { redirect, useRouter } from "next/navigation";
@@ -21,18 +22,18 @@ export default function Dashboard() {
       title: 'RC Challan API',
       description: 'The RC Challan Details API provides access to information regarding vehicle registration certificate (RC) challans',
       icon: BarChart,
-      link: 'rc-challan'
+      link: 'rc-challanapi'
     },
     {
       title: 'RC Advanced Verification',
       description: 'The RC Challan Details API provides access to information regarding vehicle registration certificate (RC) challans',
       icon: BarChart3,
-      link: 'rc-adv'
+      link: 'rc-advapi'
     },
     {
       title: 'Pay Challan',
       description: 'The RC Challan Details API provides access to information regarding vehicle registration certificate (RC) challans',
-      icon: BarChart3,
+      icon: BadgeDollarSign,
       link: 'Challan'
     }
   ];

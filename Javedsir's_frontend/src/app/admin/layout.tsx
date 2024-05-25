@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link"
+import { useRouter } from 'next/router' // Import useRouter
 import {
     Bell,
     CircleUser,
@@ -63,13 +64,13 @@ export default function AdminLayout({
         },
         {
             title: 'Usage Insights',
-            href: 'applications',
-            icon: LineChart,
+            href: 'Usage',
+            icon: LineChart,        
             variant: 'ghost',
         },
         {
             title: 'Credits and Pricing',
-            href: 'Credits',
+            href: 'AddCredits',
             icon: DollarSign,
             variant: 'ghost',
         },
@@ -203,7 +204,7 @@ export default function AdminLayout({
                                         <Files className="h-5 w-5" />
                                         Usage Insights
                                         <Badge className="ml-auto flex h-6 w-6 shrink-0 items-center justify-center rounded-full">
-                                            6
+                                            
                                         </Badge>
                                     </Link>
                                     <Link
